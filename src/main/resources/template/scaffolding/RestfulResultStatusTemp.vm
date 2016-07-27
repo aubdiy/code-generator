@@ -1,0 +1,5 @@
+package ${basePackage}.scaffolding;
+
+public enum RestfulResultStatus {
+    FAIL, SUCCESS, PRIVILEGE_EXCEPTION, AUTHENTICATION_FAIL;
+}

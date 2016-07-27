@@ -1,0 +1,18 @@
+package ${basePackage}.scaffolding;
+
+public class PageUtil {
+	/**
+	 * 默认分页
+	 */
+	public final static int DEFAULT_PAGE_SIZE = 10;
+
+	public static int computeStartIndex(int pageNum) {
+		return (pageNum - 1) * DEFAULT_PAGE_SIZE;
+	}
+
+	public static int computeStartIndex(int pageNum, int pageSize) {
+		return (pageNum - 1) * pageSize;
+	}
+}
+
+

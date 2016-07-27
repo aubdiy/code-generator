@@ -1,0 +1,27 @@
+package ${basePackage}.scaffolding;
+
+
+public class RestfulResult {
+
+	private final String status;
+
+	private Object result;
+
+	public RestfulResult(RestfulResultStatus restfulResultStatus) {
+		this.status = restfulResultStatus.name();
+	}
+
+	public RestfulResult(RestfulResultStatus restfulResultStatus, Object result) {
+		this.status = restfulResultStatus.name();
+		this.result = result;
+	}
+
+	public Object getResult() {
+		return result;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+}

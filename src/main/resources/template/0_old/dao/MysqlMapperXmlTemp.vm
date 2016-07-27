@@ -1,0 +1,71 @@
+#set ($columnMaxIndex = $columnSize - 1)
+#set ($columnLastButOneIndex = $columnSize - 2)
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${tableNameClass}">
+
+	<insert id="insert" parameterType="${tableNameClass}" useGeneratedKeys="true" #if ($primaryKey)keyProperty="id"#end>
+		INSERT INTO $tableNameDb
+		VALUES(#foreach($index in [0..$columnLastButOneIndex])#{${columnList.get($index).columnNameVariable}}, #end#{${columnList.get($columnMaxIndex).columnNameVariable}});
+	</insert>
+#if($primaryKey)
+	
+	<update id="updateBy${primaryKey.pkName}" parameterType="${tableNameClass}">
+		UPDATE $tableNameDb 
+		SET 
+			#foreach($index in [0..$columnLastButOneIndex])${columnList.get($index).columnNameDb} = #{${columnList.get($index).columnNameVariable}},
+			#end${columnList.get(${columnMaxIndex}).columnNameDb} = #{${columnList.get(${columnMaxIndex}).columnNameVariable}}
+		WHERE ${primaryKey.pkNameDb} = #{${primaryKey.pkNameVariable}}
+	</update>
+	
+	<delete id="deleteBy${primaryKey.pkName}" parameterType="${primaryKey.pkType}">
+		DELETE FROM $tableNameDb WHERE ${primaryKey.pkNameDb} = #{${primaryKey.pkNameVariable}};
+	</delete>
+
+	<select id="selectBy${primaryKey.pkName}" parameterType="${primaryKey.pkType}" resultType="${tableNameClass}">
+		SELECT * FROM $tableNameDb WHERE ${primaryKey.pkNameDb} = #{${primaryKey.pkNameVariable}};
+	</select>
+#end
+
+	<select id="selectAll" parameterType="Map" resultType="${tableNameClass}" >
+		SELECT * 
+		FROM $tableNameDb 
+		<where>
+#foreach($column in $columnList)
+			<if test="_parameter.containsKey('${column.columnNameVariable}')">
+				AND ${column.columnNameDb} = #{${column.columnNameVariable}}
+			</if>
+#end
+		</where>
+	</select>
+	
+	<select id="selectPage" parameterType="Map" resultType="${tableNameClass}">
+		SELECT * 
+		FROM $tableNameDb 
+		<where>
+#foreach($column in $columnList)
+			<if test="${column.columnNameVariable} != null and  ${column.columnNameVariable} != ''">
+				AND ${column.columnNameDb} = #{${column.columnNameVariable}}
+			</if>
+#end
+		</where>
+#if($primaryKey)
+		ORDER BY $primaryKey.pkNameVariable DESC
+#end
+		LIMIT #{startIndex}, #{pageSize}
+	</select>
+	
+	<select id="selectPageTotalCount" parameterType="Map" resultType="int">
+		SELECT COUNT(1) 
+		FROM $tableNameDb 
+		<where>
+#foreach($column in $columnList)
+			<if test="${column.columnNameVariable} != null and  ${column.columnNameVariable} != ''">
+				AND ${column.columnNameDb} = #{${column.columnNameVariable}}
+			</if>
+#end
+		</where>
+	</select>
+</mapper>

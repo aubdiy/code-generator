@@ -1,0 +1,25 @@
+package ${systemPackage}.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import ${systemPackage}.po.${tableNameClass}Po;
+
+public interface ${tableNameClass}Dao {
+
+	public void insert(${tableNameClass}Po ${tableNameVariable}Po);
+#if($primaryKey)
+
+	public void updateBy${primaryKey.pkName}(${tableNameClass}Po ${tableNameVariable}Po);
+
+	public void deleteBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable});
+
+	public ${tableNameClass}Po selectBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable});
+#end
+
+	public List<${tableNameClass}Po> selectAll(Map<String, Object> paramMap);
+	
+	public List<${tableNameClass}Po> selectForPage(Map<String, Object> paramMap);
+	
+	public int selectForPageTotalCount(Map<String, Object> paramMap);
+}
