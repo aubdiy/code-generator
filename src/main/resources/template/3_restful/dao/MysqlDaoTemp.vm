@@ -1,0 +1,51 @@
+package ${systemPackage}.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+import ${systemPackage}.po.${tableNameClass}Po;
+import ${basePackage}.scaffolding.BaseDao;
+import ${basePackage}.scaffolding.Page;
+
+@Repository
+public class ${tableNameClass}Dao extends BaseDao {
+
+	public ${tableNameClass}Po insert(${tableNameClass}Po ${tableNameVariable}Po) {
+		sqlSessionWriter.insert("${tableNameClass}Po.insert", ${tableNameVariable}Po);
+        return ${tableNameVariable}Po;
+	}
+#if($primaryKey)
+
+	public ${primaryKey.pkType} insertReturn${primaryKey.pkName}(${tableNameClass}Po ${tableNameVariable}Po) {
+		sqlSessionWriter.insert("${tableNameClass}Po.insert", ${tableNameVariable}Po);
+		return ${tableNameVariable}Po.get${primaryKey.pkName}();
+	}
+
+	public ${tableNameClass}Po updateBy${primaryKey.pkName}(${tableNameClass}Po ${tableNameVariable}Po) {
+		sqlSessionWriter.update("${tableNameClass}Po.updateBy${primaryKey.pkName}", ${tableNameVariable}Po);
+        return ${tableNameVariable}Po;
+	}
+
+	public void deleteBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
+		sqlSessionWriter.delete("${tableNameClass}Po.deleteBy${primaryKey.pkName}", ${primaryKey.pkNameVariable});
+	}
+
+	public ${tableNameClass}Po selectBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
+		return sqlSessionReader.selectOne("${tableNameClass}Po.selectBy${primaryKey.pkName}", ${primaryKey.pkNameVariable});
+	}
+#end
+
+	public List<${tableNameClass}Po> selectAll(Map<String, Object> paramMap) {
+		return sqlSessionReader.selectList("${tableNameClass}Po.selectAll", paramMap);
+	}
+
+	public Page<${tableNameClass}Po> selectForPage(Map<String, Object> paramMap, int pageNum) {
+		paramMap.put("pageSize", DEFAULT_PAGE_SIZE);
+		paramMap.put("startIndex", getStartIndex(pageNum, DEFAULT_PAGE_SIZE));
+		List<${tableNameClass}Po> list = sqlSessionReader.selectList("${tableNameClass}Po.selectForPage", paramMap);
+		int totalCount = sqlSessionReader.selectOne("${tableNameClass}Po.selectForPageTotalCount", paramMap);
+		return new Page<>(pageNum, DEFAULT_PAGE_SIZE, totalCount, list);
+	}
+}
