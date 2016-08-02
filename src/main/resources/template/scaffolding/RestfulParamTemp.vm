@@ -163,6 +163,27 @@ public class RestfulParam extends LinkedHashMap<String, String> {
         return list;
     }
 
+    public Date getDateByMillSec(String key) {
+        String value = get(key);
+        if (value == null) {
+            return null;
+        }
+        return new Date(Long.parseLong(value));
+    }
+
+    public Date getDateByFormat(String key, String format) {
+        String value = get(key);
+        if (value == null) {
+            return null;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        try {
+            return sdf.parse(value);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
     public HttpServletRequest getRequest() {
         return request;
     }

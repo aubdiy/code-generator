@@ -51,6 +51,9 @@ public class ScaffoldingGenerator extends Generator {
 			outputFilePath = generateOutputFilePath("RestfulResult", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
 			write2File("scaffolding/RestfulResultTemp.vm", context, outputFilePath);
 
+            outputFilePath = generateOutputFilePath("Response", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
+            write2File("scaffolding/ResponseTemp.vm", context, outputFilePath);
+
 			outputFilePath = generateOutputFilePath("SpringContext", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
 			write2File("scaffolding/SpringContextTemp.vm", context, outputFilePath);
 
