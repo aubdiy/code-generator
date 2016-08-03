@@ -30,7 +30,7 @@
 	| db.type         | 目前仅支持MYSQL（可自行扩展)  |
 	| table.prefix    | 需要生成代码的表前缀  |
 	| base.package    | 基础包名            |
-	| schema          | 模板包（可自行扩展）  |
+	| schema          | 模板包（可自行扩展），对应 resources/template下的模板目录  |
 	| gen.act         | 是否生成 action（controler）层，0:false，1:true |
 	| gen.biz         | 是否生成 business（service）层，0:false，1:true |
 	| gen.dao         | 是否生成 dao层 ，0:false，1:true |
@@ -44,10 +44,12 @@
 * 第四步：到“output.dir”指定的目录，将代码导入到你的项目工程
 
 ## 如何扩展
-1. 如果想增加对其他数据库的支持， 分两步
+1. 自定义模板，请根据自己的工程框架，添加自己的工程模板，模板中的变量请参考template/2_common模板包中的模板变量，变量含义请参考“self/aub/product/code/generator/bean”包中的bean类
+
+2. 如果想增加对其他数据库的支持， 分两步
 	- 请扩展 “self.aub.product.code.generator.reader.AbstractDbReader”类，请参考“MysqlDbReader”，并在“DbReaderFactory”类中增加对其的支持
 	- 请实现“ self.aub.product.code.generator.generator.db. DbGenerator”接口，可参考MysqlGenerator类，并在“DbGeneratorFactory”类中增加对其的支持
 
-2. 如果想增加对其他数据源（非数据库）的支持，根据整个生成器架构，自行实现 reader和generator(好像是废话，别打我! ^_^) 
+3. 如果想增加对其他数据源（非数据库）的支持，根据整个生成器架构，自行实现 reader和generator(好像是废话，别打我! ^_^) 
 
 			
