@@ -1,6 +1,6 @@
 package ${basePackage}.scaffolding;
 
-public class ConstantTemp {
+public class Constant {
 	public static final char CHAR_TAB = '\t';
 	public static final char CHAR_enter = '\n';
 	public static final char CHAR_SOH = '\u0001';

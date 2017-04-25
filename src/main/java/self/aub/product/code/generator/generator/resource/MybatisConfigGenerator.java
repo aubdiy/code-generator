@@ -1,10 +1,12 @@
 package self.aub.product.code.generator.generator.resource;
 
-import self.aub.product.code.generator.bean.MybatisMapper;
-import self.aub.product.code.generator.generator.Generator;
 import org.apache.velocity.VelocityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import self.aub.product.code.generator.bean.Layer;
+import self.aub.product.code.generator.bean.MybatisMapper;
+import self.aub.product.code.generator.config.GeneratorConfig;
+import self.aub.product.code.generator.generator.Generator;
 
 import java.util.List;
 
@@ -16,6 +18,8 @@ public class MybatisConfigGenerator extends Generator {
 		VelocityContext context = new VelocityContext();
 		context.put("basePackage", basePackage);
 		context.put("mybatisMapperList", mybatisMapperList);
+		Layer layer = GeneratorConfig.getLayer();
+		context.put( "layer", layer );
 		write2FileBySchema("/resource/MysqlMybatisConfigTemp.vm", context, outputDir.concat("mybatis.xml"));
 	}
 }

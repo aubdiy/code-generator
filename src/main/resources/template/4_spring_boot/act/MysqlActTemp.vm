@@ -1,0 +1,46 @@
+package ${systemPackage}.${layer.layerNameAct};
+
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import ${systemPackage}.${layer.layerNamePo}.${tableNameClass}Po;
+import ${systemPackage}.${layer.layerNameBiz}.${tableNameClass}Service;
+
+import javax.annotation.Resource;
+import java.util.Map;
+
+
+@RestController
+@RequestMapping("/${tableNameVariable}")
+public class ${tableNameClass}Ctl {
+    @Resource
+    private ${tableNameClass}Service ${tableNameVariable}Service;
+
+    @RequestMapping(method = RequestMethod.POST)
+    public boolean create(${tableNameClass}Po ${tableNameVariable}Po) {
+        return ${tableNameVariable}Service.create( ${tableNameVariable}Po );
+    }
+#if($primaryKey)
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public boolean updateBy${primaryKey.pkName}(${tableNameClass}Po ${tableNameVariable}Po) {
+        return ${tableNameVariable}Service.updateBy${primaryKey.pkName}( ${tableNameVariable}Po );
+    }
+
+    @RequestMapping(path = "{${primaryKey.pkNameVariable}}", method = RequestMethod.DELETE)
+    public boolean removeBy${primaryKey.pkName}(@PathVariable("${primaryKey.pkNameVariable}") ${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
+        return ${tableNameVariable}Service.removeBy${primaryKey.pkName}( ${primaryKey.pkNameVariable} );
+    }
+
+    @RequestMapping(path = "{${primaryKey.pkNameVariable}}", method = RequestMethod.GET)
+    public DemoPo getBy${primaryKey.pkName}(@PathVariable("${primaryKey.pkNameVariable}") ${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
+        return ${tableNameVariable}Service.getBy${primaryKey.pkName}( ${primaryKey.pkNameVariable} );
+    }
+#end
+    @RequestMapping(path = "s", method = RequestMethod.GET)
+    public Page<${tableNameClass}Po> listForPage(Map<String, Object> paramMap) {
+        return ${tableNameVariable}Service.listForPage( paramMap, 1 );
+    }
+}

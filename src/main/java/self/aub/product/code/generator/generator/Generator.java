@@ -1,11 +1,5 @@
 package self.aub.product.code.generator.generator;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
@@ -13,16 +7,31 @@ import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import self.aub.product.code.generator.config.GeneratorConfig;
 import self.aub.product.code.generator.util.Constant;
 import self.aub.product.code.generator.util.Constant.Layer;
 import self.aub.product.code.generator.util.Constant.LayerClassSuffix;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+
 public class Generator {
 	private static final Logger LOG = LoggerFactory.getLogger(Generator.class);
 
 	protected static String generateOutputFilePath(String className, String outputDir, Layer layer, LayerClassSuffix layerClassSuffix) {
+		StringBuilder outputFilePath = new StringBuilder(outputDir);
+		outputFilePath.append(layer);
+		new File(outputFilePath.toString()).mkdir();
+		outputFilePath.append(Constant.SIGN_SLASH);
+		outputFilePath.append(className);
+		outputFilePath.append(layerClassSuffix);
+		return outputFilePath.toString();
+	}
+
+	protected static String generateOutputFilePath(String className, String outputDir, String layer, String layerClassSuffix) {
 		StringBuilder outputFilePath = new StringBuilder(outputDir);
 		outputFilePath.append(layer);
 		new File(outputFilePath.toString()).mkdir();

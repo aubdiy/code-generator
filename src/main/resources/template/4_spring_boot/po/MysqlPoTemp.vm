@@ -1,0 +1,17 @@
+package ${systemPackage}.${layer.layerNamePo};
+
+import lombok.Data;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+@Data
+public class ${tableNameClass}Po {
+#foreach ($column in $columnList) 
+	private ${column.columnType} ${column.columnNameVariable};
+#end
+
+    public ${tableNameClass}Po() {
+    }
+
+}
