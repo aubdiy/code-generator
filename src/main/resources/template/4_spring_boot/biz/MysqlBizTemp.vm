@@ -14,34 +14,34 @@ import static org.springframework.beans.support.PagedListHolder.DEFAULT_PAGE_SIZ
 
 @Service
 public class ${tableNameClass}Service {
-	@Resource
-	private ${tableNameClass}Mapper ${tableNameVariable}Mapper;
+    @Resource
+    private ${tableNameClass}Mapper ${tableNameVariable}Mapper;
 
-	public boolean create(${tableNameClass}Po ${tableNameVariable}Po) {
-		return ${tableNameVariable}Mapper.insert( ${tableNameVariable}Po ) > 0;
-	}
+    public boolean create(${tableNameClass}Po ${tableNameVariable}Po) {
+        return ${tableNameVariable}Mapper.insert( ${tableNameVariable}Po ) > 0;
+    }
 #if($primaryKey)
 
-	public boolean updateBy${primaryKey.pkName}(${tableNameClass}Po ${tableNameVariable}Po) {
-		return ${tableNameVariable}Mapper.updateBy${primaryKey.pkName}( ${tableNameVariable}Po ) > 0;
-	}
+    public boolean updateBy${primaryKey.pkName}(${tableNameClass}Po ${tableNameVariable}Po) {
+        return ${tableNameVariable}Mapper.updateBy${primaryKey.pkName}( ${tableNameVariable}Po ) > 0;
+    }
 
-	public boolean removeBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
-		return ${tableNameVariable}Mapper.deleteBy${primaryKey.pkName}( ${primaryKey.pkNameVariable} ) > 0;
-	}
+    public boolean removeBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
+        return ${tableNameVariable}Mapper.deleteBy${primaryKey.pkName}( ${primaryKey.pkNameVariable} ) > 0;
+    }
 
-	public ${tableNameClass}Po getBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
-		return ${tableNameVariable}Mapper.selectBy${primaryKey.pkName}( ${primaryKey.pkType} ${primaryKey.pkNameVariable} );
-	}
+    public ${tableNameClass}Po getBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
+        return ${tableNameVariable}Mapper.selectBy${primaryKey.pkName}( ${primaryKey.pkNameVariable} );
+    }
 #end
 
-	public List<${tableNameClass}Po> list(Map<String, Object> paramMap) {
-    	return ${tableNameVariable}Mapper.selectAll( paramMap );
+    public List<${tableNameClass}Po> list(Map<String, Object> paramMap) {
+        return ${tableNameVariable}Mapper.selectAll( paramMap );
     }
 
     public Page<${tableNameClass}Po> listForPage(Map<String, Object> paramMap, int pageNum) {
         long total = ${tableNameVariable}Mapper.countForPage( paramMap );
         List<${tableNameClass}Po> demoPos = ${tableNameVariable}Mapper.selectForPage( paramMap, (pageNum - 1) * DEFAULT_PAGE_SIZE, DEFAULT_PAGE_SIZE );
-		return new PageImpl<>( demoPos, null, total );
-	}
+        return new PageImpl<>( demoPos, null, total );
+    }
 }

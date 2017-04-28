@@ -9,22 +9,22 @@ import java.util.Map;
 
 @Mapper
 public interface ${tableNameClass}Mapper {
-	int insert(${tableNameClass}Po ${tableNameVariable}Po);
+    int insert(${tableNameClass}Po ${tableNameVariable}Po);
 
-	int inserts(List<${tableNameClass}Po> ${tableNameVariable}Pos);
+    int inserts(List<${tableNameClass}Po> ${tableNameVariable}Pos);
 #if($primaryKey)
 
     int updateById(${tableNameClass}Po ${tableNameVariable}Po);
 
     int deleteBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable});
 
-	${tableNameClass}Po selectBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable})
+    ${tableNameClass}Po selectBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable});
 #end
 
-    List<${tableNameClass}Po> selectAll(Map<String, Object> paramMap)
+    List<${tableNameClass}Po> selectAll(Map<String, Object> paramMap);
 
-	long countForPage(Map<String, Object> paramMap);
+    long countForPage(Map<String, Object> paramMap);
 
-	List<${tableNameClass}Po> selectForPage(@Param("paramMap")Map<String, Object> paramMap, @Param("startIndex") int startIndex, @Param("pageSize")int pageSize);
+    List<${tableNameClass}Po> selectForPage(@Param("paramMap")Map<String, Object> paramMap, @Param("startIndex") int startIndex, @Param("pageSize")int pageSize);
 
 }

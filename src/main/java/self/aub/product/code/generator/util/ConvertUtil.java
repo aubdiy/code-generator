@@ -80,22 +80,22 @@ public class ConvertUtil {
         String javaType;
         switch (dbDateType) {
             case Types.TINYINT:
-                javaType = "Short";
+                javaType = "short";
                 break;
             case Types.SMALLINT:
-                javaType = "Short";
+                javaType = "short";
                 break;
             case Types.INTEGER:
-                javaType = "Integer";
+                javaType = "int";
                 break;
             case Types.BIGINT:
-                javaType = "Long";
+                javaType = "long";
                 break;
             case Types.FLOAT:
-                javaType = "Float";
+                javaType = "float";
                 break;
             case Types.DOUBLE:
-                javaType = "Double";
+                javaType = "double";
                 break;
             case Types.CHAR:
                 javaType = "String";
@@ -113,7 +113,7 @@ public class ConvertUtil {
                 javaType = "Date";
                 break;
             case Types.BOOLEAN:
-                javaType = "Boolean";
+                javaType = "boolean";
                 break;
             default:
                 javaType = "String";

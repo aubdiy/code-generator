@@ -1,9 +1,9 @@
 #set ($columnMaxIndex = $columnSize - 1)
 #set ($columnLastButOneIndex = $columnSize - 2)
 #if($primaryKey)
-	#set ($startIndex = 1)
+    #set ($startIndex = 1)
 #else
-	#set ($startIndex = 0)
+    #set ($startIndex = 0)
 #end
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
@@ -11,44 +11,44 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${systemPackage}.${layer.layerNameDao}.${tableNameClass}Mapper">
 
-	<resultMap id="${tableNameClass}PoMap" type="${tableNameClass}Po">
+    <resultMap id="${tableNameClass}PoMap" type="${tableNameClass}Po">
 #foreach ($column in $columnList)
-		<result property="${column.columnNameVariable}" column="${column.columnNameDb}" />
+        <result property="${column.columnNameVariable}" column="${column.columnNameDb}" />
 #end
-	</resultMap>
+    </resultMap>
 
-	<insert id="insert" parameterType="${tableNameClass}Po" #if ($primaryKey)useGeneratedKeys="true" keyProperty="${primaryKey.pkNameVariable}"#end>
-		INSERT INTO $tableNameDb
-			(
-#foreach($index in [$startIndex..$columnLastButOneIndex])
-				${columnList.get($index).columnNameDb},
-#end
-				${columnList.get($columnMaxIndex).columnNameDb}
-			)
-		VALUES
-			(
-#foreach($index in [$startIndex..$columnLastButOneIndex])
-				#{${columnList.get($index).columnNameVariable}},
-#end
-				#{${columnList.get($columnMaxIndex).columnNameVariable}}
-			)
-	</insert>
-
-    <insert id="inserts" parameterType="List" #if ($primaryKey)useGeneratedKeys="true" keyProperty="${primaryKey.pkNameVariable}"#end>
+    <insert id="insert" parameterType="${tableNameClass}Po" #if ($primaryKey)useGeneratedKeys="true" keyProperty="${primaryKey.pkNameVariable}"#end>
         INSERT INTO $tableNameDb
-        	(
+            (
 #foreach($index in [$startIndex..$columnLastButOneIndex])
-				${columnList.get($index).columnNameDb},
+                ${columnList.get($index).columnNameDb},
 #end
-	        	${columnList.get($columnMaxIndex).columnNameDb}
-        	)
+                ${columnList.get($columnMaxIndex).columnNameDb}
+            )
+        VALUES
+            (
+#foreach($index in [$startIndex..$columnLastButOneIndex])
+                #{${columnList.get($index).columnNameVariable}},
+#end
+                #{${columnList.get($columnMaxIndex).columnNameVariable}}
+            )
+    </insert>
+
+    <insert id="inserts" parameterType="list" #if ($primaryKey)useGeneratedKeys="true" keyProperty="${primaryKey.pkNameVariable}"#end>
+        INSERT INTO $tableNameDb
+            (
+#foreach($index in [$startIndex..$columnLastButOneIndex])
+                ${columnList.get($index).columnNameDb},
+#end
+                ${columnList.get($columnMaxIndex).columnNameDb}
+            )
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
             (
 #foreach($index in [$startIndex..$columnLastButOneIndex])
                 #{item.${columnList.get($index).columnNameVariable}},
 #end
-            	#{item.${columnList.get($columnMaxIndex).columnNameVariable}}
+                #{item.${columnList.get($columnMaxIndex).columnNameVariable}}
             )
         </foreach>
     </insert>
@@ -63,38 +63,38 @@
         </set>
         WHERE ${primaryKey.pkNameDb} = #{${primaryKey.pkNameVariable}}
     </update>
-	
-	<delete id="deleteBy${primaryKey.pkName}" parameterType="${primaryKey.pkType}">
-		DELETE FROM $tableNameDb WHERE ${primaryKey.pkNameDb} = #{${primaryKey.pkNameVariable}}
-	</delete>
+    
+    <delete id="deleteBy${primaryKey.pkName}" parameterType="${primaryKey.pkType}">
+        DELETE FROM $tableNameDb WHERE ${primaryKey.pkNameDb} = #{${primaryKey.pkNameVariable}}
+    </delete>
 
-	<select id="selectBy${primaryKey.pkName}" parameterType="${primaryKey.pkType}" resultType="${tableNameClass}Po">
-		SELECT
+    <select id="selectBy${primaryKey.pkName}" parameterType="${primaryKey.pkType}" resultType="${tableNameClass}Po">
+        SELECT
 #foreach($index in [0..$columnLastButOneIndex])
-			${columnList.get($index).columnNameDb},
+            ${columnList.get($index).columnNameDb},
 #end
-			${columnList.get($columnMaxIndex).columnNameDb}
-		FROM $tableNameDb WHERE ${primaryKey.pkNameDb} = #{${primaryKey.pkNameVariable}}
-	</select>
+            ${columnList.get($columnMaxIndex).columnNameDb}
+        FROM $tableNameDb WHERE ${primaryKey.pkNameDb} = #{${primaryKey.pkNameVariable}}
+    </select>
 #end
 
-	<select id="selectAll" parameterType="Map" resultType="${tableNameClass}Po" >
-		SELECT
+    <select id="selectAll" parameterType="map" resultType="${tableNameClass}Po" >
+        SELECT
 #foreach($index in [0..$columnLastButOneIndex])
-			${columnList.get($index).columnNameDb},
+            ${columnList.get($index).columnNameDb},
 #end
-			${columnList.get($columnMaxIndex).columnNameDb}
-		FROM $tableNameDb 
-		<where>
+            ${columnList.get($columnMaxIndex).columnNameDb}
+        FROM $tableNameDb 
+        <where>
 #foreach($column in $columnList)
-			<if test="_parameter.containsKey('${column.columnNameVariable}')">
-				AND ${column.columnNameDb} = #{${column.columnNameVariable}}
-			</if>
+            <if test="_parameter.containsKey('${column.columnNameVariable}')">
+                AND ${column.columnNameDb} = #{${column.columnNameVariable}}
+            </if>
 #end
-		</where>
-	</select>
+        </where>
+    </select>
 
-    <select id="countForPage" parameterType="Map" resultType="List">
+    <select id="countForPage" parameterType="map" resultType="List">
         SELECT COUNT(1)
         FROM $tableNameDb
         <where>
@@ -105,24 +105,24 @@
 #end
         </where>
     </select>
-	
-	<select id="selectForPage" parameterType="Map" resultType="${tableNameClass}Po">
-		SELECT
+    
+    <select id="selectForPage" parameterType="map" resultType="${tableNameClass}Po">
+        SELECT
 #foreach($index in [0..$columnLastButOneIndex])
-				${columnList.get($index).columnNameDb},
+                ${columnList.get($index).columnNameDb},
 #end
-				#{${columnList.get($columnMaxIndex).columnNameDb}}
-		FROM $tableNameDb 
-		<where>
+                #{${columnList.get($columnMaxIndex).columnNameDb}}
+        FROM $tableNameDb 
+        <where>
 #foreach($column in $columnList)
-			<if test="${column.columnNameVariable} != null and  ${column.columnNameVariable} != ''">
-				AND ${column.columnNameDb} = #{${column.columnNameVariable}}
-			</if>
+            <if test="${column.columnNameVariable} != null and  ${column.columnNameVariable} != ''">
+                AND ${column.columnNameDb} = #{${column.columnNameVariable}}
+            </if>
 #end
-		</where>
+        </where>
 #if($primaryKey)
-		ORDER BY $primaryKey.pkNameDb DESC
+        ORDER BY $primaryKey.pkNameDb DESC
 #end
-		LIMIT #{startIndex}, #{pageSize}
-	</select>
+        LIMIT #{startIndex}, #{pageSize}
+    </select>
 </mapper>

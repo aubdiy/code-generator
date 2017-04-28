@@ -35,7 +35,7 @@ public class ${tableNameClass}Ctl {
     }
 
     @RequestMapping(path = "{${primaryKey.pkNameVariable}}", method = RequestMethod.GET)
-    public DemoPo getBy${primaryKey.pkName}(@PathVariable("${primaryKey.pkNameVariable}") ${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
+    public ${tableNameClass}Po getBy${primaryKey.pkName}(@PathVariable("${primaryKey.pkNameVariable}") ${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
         return ${tableNameVariable}Service.getBy${primaryKey.pkName}( ${primaryKey.pkNameVariable} );
     }
 #end

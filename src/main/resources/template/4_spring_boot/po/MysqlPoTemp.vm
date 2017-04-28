@@ -8,7 +8,7 @@ import java.util.Date;
 @Data
 public class ${tableNameClass}Po {
 #foreach ($column in $columnList) 
-	private ${column.columnType} ${column.columnNameVariable};
+    private ${column.columnType} ${column.columnNameVariable};
 #end
 
     public ${tableNameClass}Po() {
