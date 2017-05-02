@@ -2,6 +2,7 @@ package ${systemPackage}.${layer.layerNameBiz};
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ${systemPackage}.${layer.layerNameDao}.${tableNameClass}Mapper;
 import ${systemPackage}.${layer.layerNamePo}.${tableNameClass}Po;
@@ -42,6 +43,6 @@ public class ${tableNameClass}Service {
     public Page<${tableNameClass}Po> listForPage(Map<String, Object> paramMap, int pageNum) {
         long total = ${tableNameVariable}Mapper.countForPage( paramMap );
         List<${tableNameClass}Po> demoPos = ${tableNameVariable}Mapper.selectForPage( paramMap, (pageNum - 1) * DEFAULT_PAGE_SIZE, DEFAULT_PAGE_SIZE );
-        return new PageImpl<>( demoPos, null, total );
+        return new PageImpl<>( demoPos, new PageRequest( pageNum, DEFAULT_PAGE_SIZE ), total );
     }
 }

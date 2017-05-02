@@ -99,7 +99,7 @@
         FROM $tableNameDb
         <where>
 #foreach($column in $columnList)
-                <if test="${column.columnNameVariable} != null and  ${column.columnNameVariable} != ''">
+                <if test="${column.columnNameVariable} != null and ${column.columnNameVariable} != ''">
                     AND ${column.columnNameDb} = #{${column.columnNameVariable}}
                 </if>
 #end
@@ -111,11 +111,11 @@
 #foreach($index in [0..$columnLastButOneIndex])
                 ${columnList.get($index).columnNameDb},
 #end
-                #{${columnList.get($columnMaxIndex).columnNameDb}}
+                ${columnList.get($columnMaxIndex).columnNameDb}
         FROM $tableNameDb 
         <where>
 #foreach($column in $columnList)
-            <if test="${column.columnNameVariable} != null and  ${column.columnNameVariable} != ''">
+            <if test="${column.columnNameVariable} != null and ${column.columnNameVariable} != ''">
                 AND ${column.columnNameDb} = #{${column.columnNameVariable}}
             </if>
 #end
