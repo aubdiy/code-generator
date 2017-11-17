@@ -4,52 +4,62 @@ import self.aub.product.code.generator.util.ConvertUtil;
 
 /**
  * <B>数据库表字段</B><br>
- * 
+ *
  * @author aub
  */
 public class Column {
 
-	/**
-	 * 对应的java字段名，例如“LoginName”
-	 */
-	private final String columnName;
+    /**
+     * 对应的java字段名，例如“LoginName”
+     */
+    private final String columnName;
 
-	/**
-	 * 对应的java类型名，例如“Integer”
-	 */
-	private final String columnType;
+    /**
+     * 对应的java类型名，例如“Integer”
+     */
+    private final String columnType;
 
-	/**
-	 * 数据库字段名，例如“login_name”
-	 */
-	private final String columnNameDb;
+    /**
+     * 描述
+     */
+    private final String columneRemarks;
 
-	/**
-	 * 字段变量名，例如“loginName”
-	 */
-	private final String columnNameVariable;
+    /**
+     * 数据库字段名，例如“login_name”
+     */
+    private final String columnNameDb;
 
-	public Column(String columnNameDb, int dbDateType) {
-		this.columnName = ConvertUtil.convert2CamelCase(columnNameDb);
-		this.columnType = ConvertUtil.conver2JavaType(dbDateType);
-		this.columnNameDb = columnNameDb;
-		this.columnNameVariable = ConvertUtil.conver2VariableName(columnName);
-	}
+    /**
+     * 字段变量名，例如“loginName”
+     */
+    private final String columnNameVariable;
 
-	public String getColumnName() {
-		return columnName;
-	}
+    public Column(String columnNameDb, int dbDateType, String columneRemarks) {
+        this.columnName = ConvertUtil.convert2CamelCase(columnNameDb);
+        this.columnType = ConvertUtil.conver2JavaType(dbDateType);
+        this.columnNameDb = columnNameDb;
+        this.columneRemarks = columneRemarks;
+        this.columnNameVariable = ConvertUtil.conver2VariableName(columnName);
+    }
 
-	public String getColumnType() {
-		return columnType;
-	}
+    public String getColumnName() {
+        return columnName;
+    }
 
-	public String getColumnNameDb() {
-		return columnNameDb;
-	}
+    public String getColumnType() {
+        return columnType;
+    }
 
-	public String getColumnNameVariable() {
-		return columnNameVariable;
-	}
+    public String getColumneRemarks() {
+        return columneRemarks;
+    }
+
+    public String getColumnNameDb() {
+        return columnNameDb;
+    }
+
+    public String getColumnNameVariable() {
+        return columnNameVariable;
+    }
 
 }

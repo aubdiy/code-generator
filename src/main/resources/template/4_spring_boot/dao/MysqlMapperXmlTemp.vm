@@ -58,7 +58,7 @@
         UPDATE $tableNameDb
         <set>
 #foreach($index in [$startIndex..$columnMaxIndex])
-            <if test=" ${columnList.get(${index}).columnNameVariable} != null"> ${columnList.get(${index}).columnNameDb} = #{${columnList.get(${columnMaxIndex}).columnNameVariable}},</if>
+            <if test=" ${columnList.get(${index}).columnNameVariable} != null"> ${columnList.get(${index}).columnNameDb} = #{${columnList.get(${index}).columnNameVariable}},</if>
 #end
         </set>
         WHERE ${primaryKey.pkNameDb} = #{${primaryKey.pkNameVariable}}
@@ -94,7 +94,7 @@
         </where>
     </select>
 
-    <select id="countForPage" parameterType="map" resultType="List">
+    <select id="countForPage" parameterType="map" resultType="long">
         SELECT COUNT(1)
         FROM $tableNameDb
         <where>
