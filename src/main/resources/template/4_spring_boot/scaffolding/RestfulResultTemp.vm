@@ -1,0 +1,26 @@
+package ${basePackage}.common;
+
+import com.alibaba.fastjson.JSONObject;
+import lombok.Data;
+
+@Data
+public class RestfulResult {
+
+    private int status;
+
+    private String message;
+
+    private Object data;
+
+    public RestfulResult(Object data) {
+        this.status = RestfulStatusEnum.SUCCESS.getStatus();
+        this.message = RestfulStatusEnum.SUCCESS.name();
+        this.data = data;
+    }
+
+    public RestfulResult(RestfulStatusEnum restfulStatusEnum, String message) {
+        this.status = restfulStatusEnum.getStatus();
+        this.message = message;
+        this.data = new JSONObject();
+    }
+}

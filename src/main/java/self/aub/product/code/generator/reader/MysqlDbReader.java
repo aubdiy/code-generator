@@ -14,15 +14,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author aub
+ */
 public class MysqlDbReader extends AbstractDbReader {
     private static final Logger LOG = LoggerFactory.getLogger(MysqlDbReader.class);
 
-    /**
-     * <B>获取当前库所有表名</B><br>
-     *
-     * @return
-     * @author aub
-     */
     @Override
     public List<String> getTableNames() {
         ArrayList<String> tableNames = new ArrayList<String>();
@@ -49,13 +46,6 @@ public class MysqlDbReader extends AbstractDbReader {
         return tableNames;
     }
 
-    /**
-     * <B>获取表的所有列</B><br>
-     *
-     * @param tableName
-     * @return
-     * @author aub
-     */
     @Override
     public Map<String, Column> getColumns(String tableName) {
         Map<String, Column> cloums = new LinkedHashMap<String, Column>();
@@ -81,13 +71,6 @@ public class MysqlDbReader extends AbstractDbReader {
         return cloums;
     }
 
-    /**
-     * <B>获取表的主键</B><br>
-     *
-     * @param tableName
-     * @return primary key name
-     * @author aub
-     */
     @Override
     public String getPrimaryKeyName(String tableName) {
         Connection conn = getConn();

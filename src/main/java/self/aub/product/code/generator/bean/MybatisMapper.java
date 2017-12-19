@@ -1,8 +1,8 @@
 package self.aub.product.code.generator.bean;
 
+
 /**
  * @author aub
- * @since 2015-07-28 21:24
  */
 public class MybatisMapper {
 

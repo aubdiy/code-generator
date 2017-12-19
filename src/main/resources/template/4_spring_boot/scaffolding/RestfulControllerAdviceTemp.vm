@@ -1,0 +1,34 @@
+package ${basePackage}.common;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.servlet.http.HttpServletRequest;
+
+
+@ControllerAdvice
+public class RestfulControllerAdvice {
+
+    private static final Logger LOG = LogManager.getLogger(${basePackage}.common.RestfulControllerAdvice.class);
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public HFResult handleSQLException(HttpServletRequest request, Exception exception) {
+        LOG.error("", exception);
+        ResultStatusEnum status;
+        if (exception instanceof IllegalArgumentException) {
+            status = ResultStatusEnum.ILLEG_ALARGUMENT;
+        } else {
+            status = ResultStatusEnum.FAIL;
+        }
+        return new HFResult(status, exception.getMessage());
+    }
+}
+
+

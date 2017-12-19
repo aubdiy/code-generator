@@ -2,6 +2,9 @@ package self.aub.product.code.generator.util;
 
 import java.sql.Types;
 
+/**
+ * @author aub
+ */
 public class ConvertUtil {
 
     /**
@@ -10,7 +13,6 @@ public class ConvertUtil {
      *
      * @param nameInDb
      * @return
-     * @author aub
      */
     public static String convert2CamelCase(String nameInDb) {
         StringBuilder amelCaseName = new StringBuilder();
@@ -35,7 +37,6 @@ public class ConvertUtil {
      *
      * @param camelCaseName
      * @return
-     * @author aub
      */
     public static String conver2VariableName(String camelCaseName) {
         char firstChar = camelCaseName.charAt(0);
@@ -52,9 +53,8 @@ public class ConvertUtil {
      * <B>将数据库命名转换为url路径</B><br>
      * 例如, “sys_user” 装换为 “sys/user”
      *
-     * @param nameInDb
+     * @param nameInDb 数据库命名
      * @return
-     * @author aub
      */
     public static String conver2RequestMapping(String nameInDb) {
         StringBuilder requestMapping = new StringBuilder();
@@ -72,9 +72,8 @@ public class ConvertUtil {
     /**
      * <B>将数据库类型转换为java类型</B><br>
      *
-     * @param dbDateType
-     * @return
-     * @author aub
+     * @param dbDateType 数据库数据类型
+     * @return java 数据类型
      */
     public static String conver2JavaType(int dbDateType) {
         String javaType;

@@ -1,14 +1,8 @@
 package self.aub.product.code.generator.generator.db;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import self.aub.product.code.generator.bean.MybatisMapper;
-import self.aub.product.code.generator.generator.resource.MybatisConfigGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import self.aub.product.code.generator.bean.MybatisMapper;
 import self.aub.product.code.generator.bean.Table;
 import self.aub.product.code.generator.config.GeneratorConfig;
 import self.aub.product.code.generator.generator.pkg.act.MysqlActGenerator;
@@ -16,8 +10,16 @@ import self.aub.product.code.generator.generator.pkg.biz.MysqlBizGenerator;
 import self.aub.product.code.generator.generator.pkg.dao.MysqlDaoGenerator;
 import self.aub.product.code.generator.generator.pkg.dao.MysqlDaoMapperGenerator;
 import self.aub.product.code.generator.generator.pkg.po.MysqlPoGenerator;
+import self.aub.product.code.generator.generator.resource.MybatisConfigGenerator;
 import self.aub.product.code.generator.util.Constant;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author aub
+ */
 public class MysqlGenerator implements DbGenerator {
     private static final Logger LOG = LoggerFactory.getLogger(MysqlGenerator.class);
 
@@ -37,22 +39,16 @@ public class MysqlGenerator implements DbGenerator {
             modleMapperPath = modleName.concat(Constant.SIGN_SLASH);
         }
         // 系统包路径
-        StringBuilder systemPackageSb = new StringBuilder(basePackage).append(modlePackage);
-        String systemPackage = systemPackageSb.toString();
+        String systemPackage = basePackage + modlePackage;
 
         // 创建输出路径
         String systemPackageDir = systemPackage.replace(Constant.SIGN_DOT, Constant.SIGN_SLASH);
 
-        StringBuilder javaOutputDirSb = new StringBuilder(GeneratorConfig.getOutputDir());
-        javaOutputDirSb.append(Constant.SOURCE_JAVA);
-        javaOutputDirSb.append(systemPackageDir).append(Constant.SIGN_SLASH);
-        String javaOutputDir = javaOutputDirSb.toString();
+        String javaOutputDir = GeneratorConfig.getOutputDir() + Constant.SOURCE_JAVA + systemPackageDir + Constant.SIGN_SLASH;
         new File(javaOutputDir).mkdirs();
         LOG.debug("generate ouput java dir : {}", javaOutputDir);
 
-        StringBuilder mapperOutputDirSb = new StringBuilder(GeneratorConfig.getOutputDir());
-        mapperOutputDirSb.append(Constant.SOURCE_RESOURCE_MAPPER).append(modleMapperPath);
-        String mapperOutputDir = mapperOutputDirSb.toString();
+        String mapperOutputDir = GeneratorConfig.getOutputDir() + Constant.SOURCE_RESOURCE_MAPPER + modleMapperPath;
         new File(mapperOutputDir).mkdirs();
         LOG.debug("generate ouput mapper dir : {}", mapperOutputDir);
 

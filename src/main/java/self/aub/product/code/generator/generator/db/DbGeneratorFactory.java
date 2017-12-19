@@ -2,6 +2,9 @@ package self.aub.product.code.generator.generator.db;
 
 import self.aub.product.code.generator.config.GeneratorConfig;
 
+/**
+ * @author aub
+ */
 public class DbGeneratorFactory {
 
 	public static DbGenerator createDbGenerator() {

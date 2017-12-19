@@ -1,62 +1,40 @@
 package self.aub.product.code.generator.generator.pkg.scaffolding;
 
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
+import org.apache.velocity.app.VelocityEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import self.aub.product.code.generator.config.GeneratorConfig;
 import self.aub.product.code.generator.generator.Generator;
 import self.aub.product.code.generator.util.Constant;
-import self.aub.product.code.generator.util.Constant.Layer;
-import self.aub.product.code.generator.util.Constant.LayerClassSuffix;
-import org.apache.velocity.VelocityContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.io.File;
+
+/**
+ * @author aub
+ */
 public class ScaffoldingGenerator extends Generator {
-	private static final Logger LOG = LoggerFactory.getLogger(ScaffoldingGenerator.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ScaffoldingGenerator.class);
 
-	public static void generateToolClass() {
-		if (GeneratorConfig.isGenerateTool()) {
-			String basePackage = GeneratorConfig.getBasePackage();
-			StringBuilder javaOutputDirSb = new StringBuilder(GeneratorConfig.getOutputDir());
-			javaOutputDirSb.append(Constant.SOURCE_JAVA);
-			javaOutputDirSb.append(basePackage.replace(Constant.SIGN_DOT, Constant.SIGN_SLASH));
-			javaOutputDirSb.append(Constant.SIGN_SLASH);
-			
-			String outputDir = javaOutputDirSb.toString();
+    public static void generateToolClass() {
+        if (GeneratorConfig.isGenerateTool()) {
+            LOG.debug("generate scaffolding ...");
+            String basePackage = GeneratorConfig.getBasePackage();
 
-			LOG.debug("generate scaffolding : Page.java");
+            VelocityContext context = new VelocityContext();
+            context.put("basePackage", basePackage);
+            String outputDir = GeneratorConfig.getOutputDir() + Constant.SOURCE_JAVA + basePackage.replace(Constant.SIGN_DOT, Constant.SIGN_SLASH) + Constant.SIGN_SLASH;
+            String scaffoldingPath = Velocity.getProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH) + Constant.SIGN_SLASH + GeneratorConfig.getSchema() + "/scaffolding";
 
-			VelocityContext context = new VelocityContext();
-			context.put("basePackage", basePackage);
-
-			String outputFilePath = generateOutputFilePath("Page", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
-			write2File("scaffolding/PageTemp.vm", context, outputFilePath);
-
-			outputFilePath = generateOutputFilePath("PageUtil", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
-			write2File("scaffolding/PageUtilToolClassTemp.vm", context, outputFilePath);
-
-			outputFilePath = generateOutputFilePath("BaseDao", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
-			write2File("scaffolding/BaseDaoTemp.vm", context, outputFilePath);
-
-			outputFilePath = generateOutputFilePath("Constant", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
-			write2File("scaffolding/ConstantTemp.vm", context, outputFilePath);
-
-			outputFilePath = generateOutputFilePath("RestfulController", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
-			write2File("scaffolding/RestfulControllerTemp.vm", context, outputFilePath);
-
-			outputFilePath = generateOutputFilePath("RestfulParam", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
-			write2File("scaffolding/RestfulParamTemp.vm", context, outputFilePath);
-
-			outputFilePath = generateOutputFilePath("RestfulResultStatus", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
-			write2File("scaffolding/RestfulResultStatusTemp.vm", context, outputFilePath);
-
-			outputFilePath = generateOutputFilePath("RestfulResult", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
-			write2File("scaffolding/RestfulResultTemp.vm", context, outputFilePath);
-
-            outputFilePath = generateOutputFilePath("Response", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
-            write2File("scaffolding/ResponseTemp.vm", context, outputFilePath);
-
-			outputFilePath = generateOutputFilePath("SpringContext", outputDir, Layer.SCAFFOLDING, LayerClassSuffix.JAVA);
-			write2File("scaffolding/SpringContextTemp.vm", context, outputFilePath);
-
-		}
-	}
+            File file = new File(scaffoldingPath);
+            for (File temp : file.listFiles()) {
+                String tempName = temp.getName();
+                String className = tempName.substring(0, tempName.length() - 7);
+                LOG.debug("generate scaffolding : {}.java", className);
+                String outputFilePath = generateOutputFilePath(className, outputDir, Constant.LAYER_COMMON, Constant.JAVA_FILE_SUFFIX);
+                write2FileBySchema("/scaffolding/" + tempName, context, outputFilePath);
+            }
+        }
+    }
 }

@@ -7,12 +7,18 @@ import self.aub.product.code.generator.config.VelocityConfig;
 import self.aub.product.code.generator.generator.db.DbGenerator;
 import self.aub.product.code.generator.generator.db.DbGeneratorFactory;
 import self.aub.product.code.generator.generator.pkg.scaffolding.ScaffoldingGenerator;
+import self.aub.product.code.generator.generator.pom.PomGenerator;
+import self.aub.product.code.generator.generator.resource.LogConfigGenerator;
+import self.aub.product.code.generator.generator.resource.PropertiesGenerator;
 import self.aub.product.code.generator.reader.DbReader;
 import self.aub.product.code.generator.reader.DbReaderFactory;
 
 import java.io.File;
 import java.util.List;
 
+/**
+ * @author aub
+ */
 public class Launcher {
 
     private Launcher() {
@@ -23,6 +29,7 @@ public class Launcher {
         GeneratorConfig.init();
         VelocityConfig.init();
 
+        FileUtils.forceMkdir(new File(GeneratorConfig.getOutputDir()));
         FileUtils.cleanDirectory(new File(GeneratorConfig.getOutputDir()));
 
         // 读取数据
@@ -39,6 +46,9 @@ public class Launcher {
 
         // 生成工具类
         ScaffoldingGenerator.generateToolClass();
+        PropertiesGenerator.generateRes();
+        LogConfigGenerator.generateRes();
+        PomGenerator.generate();
     }
 
     public static void main(String[] args) throws Exception {

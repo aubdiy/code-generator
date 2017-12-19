@@ -5,12 +5,14 @@ import self.aub.product.code.generator.util.Constant;
 import self.aub.product.code.generator.util.Constant.DbType;
 
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+/**
+ * @author aub
+ */
 public class GeneratorConfig {
-    private static final HashMap<String, String> configs = new HashMap<String, String>();
+    private static final HashMap<String, String> CONFIGS = new HashMap<>();
     private static final String CONFIG_FILE_PATH = "config";
 
     private static final String DB_URL = "db.url";
@@ -20,6 +22,7 @@ public class GeneratorConfig {
     private static final String DB_DRIVER = "db.driver";
 
     private static final String TABLE_PREFIX = "table.prefix";
+    private static final String PROJECT_NAME = "project.name";
     private static final String BASE_PACKAGE = "base.package";
     private static final String SEPARATE_MODLE = "separate.modle";
 
@@ -47,90 +50,94 @@ public class GeneratorConfig {
         ResourceBundle resourceBundle = PropertyResourceBundle.getBundle(CONFIG_FILE_PATH);
         for (String key : resourceBundle.keySet()) {
             String value = resourceBundle.getString(key);
-            configs.put(key, value);
+            CONFIGS.put(key, value);
         }
-        layer = new Layer(configs.get(CLASS_SUFFIX_ACT), configs.get(CLASS_SUFFIX_BIZ), configs.get(CLASS_SUFFIX_DAO), configs.get(CLASS_SUFFIX_PO));
+        layer = new Layer(CONFIGS.get(CLASS_SUFFIX_ACT), CONFIGS.get(CLASS_SUFFIX_BIZ), CONFIGS.get(CLASS_SUFFIX_DAO), CONFIGS.get(CLASS_SUFFIX_PO));
     }
 
     public static DbType getDbType() {
-        String dbTypeStr = configs.get(DB_TYPE);
+        String dbTypeStr = CONFIGS.get(DB_TYPE);
         return DbType.valueOf(dbTypeStr);
     }
 
     public static String getDbDriver() {
-        return configs.get(DB_DRIVER);
+        return CONFIGS.get(DB_DRIVER);
     }
 
     public static String getDbUrl() {
-        return configs.get(DB_URL);
+        return CONFIGS.get(DB_URL);
     }
 
     public static String getDbUserName() {
-        return configs.get(DB_USERNAME);
+        return CONFIGS.get(DB_USERNAME);
     }
 
     public static String getDbPassword() {
-        return configs.get(DB_PASSWORD);
+        return CONFIGS.get(DB_PASSWORD);
     }
 
     public static String getTablePrefix() {
-        return configs.get(TABLE_PREFIX);
+        return CONFIGS.get(TABLE_PREFIX);
+    }
+
+    public static String getProjectName() {
+        return CONFIGS.get(PROJECT_NAME);
     }
 
     public static String getBasePackage() {
-        return configs.get(BASE_PACKAGE);
+        return CONFIGS.get(BASE_PACKAGE);
     }
 
     public static boolean getSeparateModle() {
-        return configs.get(SEPARATE_MODLE).endsWith(Constant.YES);
+        return CONFIGS.get(SEPARATE_MODLE).endsWith(Constant.YES);
     }
 
     public static String getOutputDir() {
-        return configs.get(OUTPUT_DIR);
+        return CONFIGS.get(OUTPUT_DIR);
     }
 
     public static String getSchema() {
-        return configs.get(SCHEMA);
+        return CONFIGS.get(SCHEMA);
     }
 
     public static boolean isGenerateAct() {
-        return configs.get(GEN_ACT).endsWith(Constant.YES);
+        return CONFIGS.get(GEN_ACT).endsWith(Constant.YES);
     }
 
     public static boolean isGenerateBiz() {
-        return configs.get(GEN_BIZ).endsWith(Constant.YES);
+        return CONFIGS.get(GEN_BIZ).endsWith(Constant.YES);
     }
 
     public static boolean isGenerateDao() {
-        return configs.get(GEN_DAO).endsWith(Constant.YES);
+        return CONFIGS.get(GEN_DAO).endsWith(Constant.YES);
     }
 
     public static boolean isGeneratePo() {
-        return configs.get(GEN_PO).endsWith(Constant.YES);
+        return CONFIGS.get(GEN_PO).endsWith(Constant.YES);
     }
 
     public static boolean isGenerateTool() {
-        return configs.get(GEN_TOOL).endsWith(Constant.YES);
+        return CONFIGS.get(GEN_TOOL).endsWith(Constant.YES);
     }
 
     public static boolean isGenerateResource() {
-        return configs.get(GEN_RESOURCE).endsWith(Constant.YES);
+        return CONFIGS.get(GEN_RESOURCE).endsWith(Constant.YES);
     }
 
     public static String getClassSuffixAct() {
-        return configs.get(CLASS_SUFFIX_ACT);
+        return CONFIGS.get(CLASS_SUFFIX_ACT);
     }
 
     public static String getClassSuffixBiz() {
-        return configs.get(CLASS_SUFFIX_BIZ);
+        return CONFIGS.get(CLASS_SUFFIX_BIZ);
     }
 
     public static String getClassSuffixDao() {
-        return configs.get(CLASS_SUFFIX_DAO);
+        return CONFIGS.get(CLASS_SUFFIX_DAO);
     }
 
     public static String getClassSuffixPo() {
-        return configs.get(CLASS_SUFFIX_PO);
+        return CONFIGS.get(CLASS_SUFFIX_PO);
     }
 
     public static Layer getLayer() {
@@ -139,14 +146,6 @@ public class GeneratorConfig {
 
 
     public static void set(String key, String value) {
-        configs.put(key, value);
-    }
-
-    public static void main(String[] args) {
-        init();
-        for (Entry<String, String> entry : configs.entrySet()) {
-            System.out.print("[" + entry.getKey() + "]	=	");
-            System.out.println("[" + entry.getValue() + "]");
-        }
+        CONFIGS.put(key, value);
     }
 }

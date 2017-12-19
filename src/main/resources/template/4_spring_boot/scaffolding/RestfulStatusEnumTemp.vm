@@ -1,0 +1,16 @@
+package ${basePackage}.common;
+
+
+public enum RestfulStatusEnum {
+    SUCCESS( 0 ), FAIL( 1 ), ILLEG_ALARGUMENT( 2 );
+
+    private int status;
+
+    RestfulStatusEnum(int status) {
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+}

@@ -8,24 +8,26 @@ import self.aub.product.code.generator.bean.Table;
 import self.aub.product.code.generator.config.GeneratorConfig;
 import self.aub.product.code.generator.generator.Generator;
 
+/**
+ * @author aub
+ */
 public class MysqlDaoGenerator extends Generator {
-    private static final Logger LOG = LoggerFactory.getLogger( MysqlDaoGenerator.class );
+    private static final Logger LOG = LoggerFactory.getLogger(MysqlDaoGenerator.class);
 
     public static void generate(Table table, String basePackage, String systemPackage, String outputDir) {
         Layer layer = GeneratorConfig.getLayer();
-        String classSuffixDao = layer.getClassSuffixDao();
         String tableNameClass = table.getTableNameClass();
-        LOG.debug( "generate dao : {}{}.java", tableNameClass, classSuffixDao );
+        LOG.debug("generate dao : {}{}", tableNameClass, layer.getFileSuffixDao());
 
         VelocityContext context = new VelocityContext();
-        context.put( "basePackage", basePackage );
-        context.put( "systemPackage", systemPackage );
-        context.put( "tableNameClass", tableNameClass );
-        context.put( "tableNameVariable", table.getTableNameVariable() );
-        context.put( "primaryKey", table.getPrimaryKey() );
-        context.put( "layer", layer );
+        context.put("basePackage", basePackage);
+        context.put("systemPackage", systemPackage);
+        context.put("tableNameClass", tableNameClass);
+        context.put("tableNameVariable", table.getTableNameVariable());
+        context.put("primaryKey", table.getPrimaryKey());
+        context.put("layer", layer);
 
-        String outputFilePath = generateOutputFilePath( tableNameClass, outputDir, layer.getLayerNameDao(), layer.getFileSuffixDao() );
-        write2FileBySchema( "/dao/MysqlDaoTemp.vm", context, outputFilePath );
+        String outputFilePath = generateOutputFilePath(tableNameClass, outputDir, layer.getLayerNameDao(), layer.getFileSuffixDao());
+        write2FileBySchema("/dao/MysqlDaoTemp.vm", context, outputFilePath);
     }
 }

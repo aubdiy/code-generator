@@ -6,39 +6,38 @@ import self.aub.product.code.generator.bean.Table;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author aub
+ */
 public interface DbReader {
 
-	/**
-	 * <B>获取TableBean</B><br>
-	 * 
-	 * @author aub
-	 * @return
-	 */
-	List<Table> getTableBeans();
+    /**
+     * <B>获取TableBean</B><br>
+     *
+     * @return table 列表
+     */
+    List<Table> getTableBeans();
 
-	/**
-	 * <B>获取当前库所有表名</B><br>
-	 * 
-	 * @author aub
-	 * @return
-	 */
-	List<String> getTableNames();
+    /**
+     * <B>获取当前库所有表名</B><br>
+     *
+     * @return table name 列表
+     */
+    List<String> getTableNames();
 
-	/**
-	 * <B>获取表的所有列</B><br>
-	 * 
-	 * @author aub
-	 * @param tableName
-	 * @return key: column name, value: Column
-	 */
-	public Map<String, Column> getColumns(String tableName);
+    /**
+     * <B>获取表的所有列</B><br>
+     *
+     * @param tableName 表名
+     * @return key: column name, value: Column
+     */
+    Map<String, Column> getColumns(String tableName);
 
-	/**
-	 * <B>获取表的主键名</B><br>
-	 * 
-	 * @author aub
-	 * @param tableName
-	 * @return
-	 */
-	String getPrimaryKeyName(String tableName);
+    /**
+     * <B>获取表的主键名</B><br>
+     *
+     * @param tableName 表名
+     * @return 主键名
+     */
+    String getPrimaryKeyName(String tableName);
 }

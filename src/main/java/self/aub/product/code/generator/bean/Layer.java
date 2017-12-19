@@ -3,7 +3,7 @@ package self.aub.product.code.generator.bean;
 import static self.aub.product.code.generator.util.Constant.JAVA_FILE_SUFFIX;
 
 /**
- * Created by liujinxin on 2017/4/25.
+ * @author aub
  */
 public class Layer {
     private String layerNameAct;
