@@ -49,6 +49,33 @@
 * 第三步：执行 `self.aub.product.code.generator.Launcher`，开始生成代码
 * 第四步：到 `output.dir` 指定的目录，将代码导入到你的项目工程
 
+## 生成结果
+
+```
+├── output                                 // 生成结果输入目录，对应：${output.dir}
+├── src                                    
+│   ├── main                               
+│   │   ├── java                           
+│   │   │   └── self.aub.product.cgt       // 基础包名，对应：${base.package}
+│   │   │       ├── modle1                 // 模块名，${separate.modle} 设置为 1 时，有可能产生模块层
+│   │   │       │   ├── common             // 工具类包，${gen.tool} 设置为 1 时，生成对应的工具类
+│   │   │       │   ├── ctl                // 控制层包，对应：${class.suffix.act}
+│   │   │       │   ├── service            // 业务层包，对应：${class.suffix.biz}
+│   │   │       │   ├── mapper             // 映射层包，对应：${class.suffix.dao}
+│   │   │       │   └── do                 // 实体层包，对应：${class.suffix.po}
+│   │   │       └── modle2                 // 模块名
+│   │   └── resources                      
+│   │       ├── mapper                     // mybatis 映射文件包
+│   │       ├── application.properties     // 基础资源文件
+│   │       ├── application-dev.properties // 开发环境资源文件
+│   │       ├── log4j2-dev.xml             // 开发环境 log4j2 配置
+│   │       ├── log4j2-spring.xml          // 非开发环境 log4j2 配置
+│   │       └── mybatis.xml                // mybatis 配置文件
+│   └── test                               // 计划生成使用 mockito 的单元测试...还未开发
+└── pom.xml                                // maven 打包文件
+
+```
+
 ## 如何扩展
 1. 自定义模板，请根据自己的工程框架，添加自己的工程模板，模板中的变量请参考 `template/4_spring_boot` 模板包中的模板变量，变量含义请参考 `self/aub/product/code/generator/bean` 包中的定义
 
