@@ -15,18 +15,14 @@ public class VelocityConfig {
     }
 
     private static Properties generateProperties() {
-        Properties p = new Properties();
-        p.setProperty(VelocityEngine.INPUT_ENCODING, "UTF-8");
-        p.setProperty(VelocityEngine.OUTPUT_ENCODING, "UTF-8");
+        Properties properties = new Properties();
+        properties.setProperty(VelocityEngine.INPUT_ENCODING, "UTF-8");
+        properties.setProperty(VelocityEngine.OUTPUT_ENCODING, "UTF-8");
         String path = VelocityConfig.class.getResource("/").getPath();
-        p.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, path.concat("template"));
-        return p;
+        if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
+            path = path.substring(1);
+        }
+        properties.setProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH, path.concat("template"));
+        return properties;
     }
-
-    public static void main(String[] args) {
-        Velocity.init(generateProperties());
-        Velocity.getTemplate("2_common/biz/MysqlBizTemp.vm");
-        System.out.println(Velocity.getProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH));
-    }
-
 }
