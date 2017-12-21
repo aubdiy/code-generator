@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import ${systemPackage}.${layer.layerNamePo}.${tableNameClass}Po;
-import ${systemPackage}.${layer.layerNameBiz}.${tableNameClass}Service;
+import ${systemPackage}.${layer.layerNamePo}.${tableNameClass}${layer.classSuffixPo};
+import ${systemPackage}.${layer.layerNameBiz}.${tableNameClass}${layer.classSuffixBiz};
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -14,33 +14,33 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/${tableNameVariable}")
-public class ${tableNameClass}Ctl {
+public class ${tableNameClass}${layer.classSuffixAct} {
     @Resource
-    private ${tableNameClass}Service ${tableNameVariable}Service;
+    private ${tableNameClass}${layer.classSuffixBiz} ${tableNameVariable}${layer.classSuffixBiz};
 
     @RequestMapping(method = RequestMethod.POST)
-    public boolean create(${tableNameClass}Po ${tableNameVariable}Po) {
-        return ${tableNameVariable}Service.create( ${tableNameVariable}Po );
+    public boolean create(${tableNameClass}${layer.classSuffixPo} ${tableNameVariable}${layer.classSuffixPo}) {
+        return ${tableNameVariable}${layer.classSuffixBiz}.create( ${tableNameVariable}${layer.classSuffixPo} );
     }
 #if($primaryKey)
 
     @RequestMapping(method = RequestMethod.PUT)
-    public boolean updateBy${primaryKey.pkName}(${tableNameClass}Po ${tableNameVariable}Po) {
-        return ${tableNameVariable}Service.updateBy${primaryKey.pkName}( ${tableNameVariable}Po );
+    public boolean updateBy${primaryKey.pkName}(${tableNameClass}${layer.classSuffixPo} ${tableNameVariable}${layer.classSuffixPo}) {
+        return ${tableNameVariable}${layer.classSuffixBiz}.updateBy${primaryKey.pkName}( ${tableNameVariable}${layer.classSuffixPo} );
     }
 
     @RequestMapping(path = "{${primaryKey.pkNameVariable}}", method = RequestMethod.DELETE)
     public boolean removeBy${primaryKey.pkName}(@PathVariable("${primaryKey.pkNameVariable}") ${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
-        return ${tableNameVariable}Service.removeBy${primaryKey.pkName}( ${primaryKey.pkNameVariable} );
+        return ${tableNameVariable}${layer.classSuffixBiz}.removeBy${primaryKey.pkName}( ${primaryKey.pkNameVariable} );
     }
 
     @RequestMapping(path = "{${primaryKey.pkNameVariable}}", method = RequestMethod.GET)
-    public ${tableNameClass}Po getBy${primaryKey.pkName}(@PathVariable("${primaryKey.pkNameVariable}") ${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
-        return ${tableNameVariable}Service.getBy${primaryKey.pkName}( ${primaryKey.pkNameVariable} );
+    public ${tableNameClass}${layer.classSuffixPo} getBy${primaryKey.pkName}(@PathVariable("${primaryKey.pkNameVariable}") ${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
+        return ${tableNameVariable}${layer.classSuffixBiz}.getBy${primaryKey.pkName}( ${primaryKey.pkNameVariable} );
     }
 #end
     @RequestMapping(path = "s", method = RequestMethod.GET)
-    public Page<${tableNameClass}Po> listForPage(Map<String, Object> paramMap) {
-        return ${tableNameVariable}Service.listForPage( paramMap, 1 );
+    public Page<${tableNameClass}${layer.classSuffixPo}> listForPage(Map<String, Object> paramMap) {
+        return ${tableNameVariable}${layer.classSuffixBiz}.listForPage( paramMap, 1 );
     }
 }

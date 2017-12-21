@@ -19,15 +19,15 @@ public class RestfulControllerAdvice {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public HFResult handleSQLException(HttpServletRequest request, Exception exception) {
+    public RestfulResult handleSQLException(HttpServletRequest request, Exception exception) {
         LOG.error("", exception);
-        ResultStatusEnum status;
+        RestfulStatusEnum status;
         if (exception instanceof IllegalArgumentException) {
-            status = ResultStatusEnum.ILLEG_ALARGUMENT;
+            status = RestfulStatusEnum.ILLEG_ALARGUMENT;
         } else {
-            status = ResultStatusEnum.FAIL;
+            status = RestfulStatusEnum.FAIL;
         }
-        return new HFResult(status, exception.getMessage());
+        return new RestfulResult(status, exception.getMessage());
     }
 }
 

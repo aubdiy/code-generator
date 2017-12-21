@@ -9,15 +9,15 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${systemPackage}.${layer.layerNameDao}.${tableNameClass}Mapper">
+<mapper namespace="${systemPackage}.${layer.layerNameDao}.${tableNameClass}${layer.classSuffixDao}">
 
-    <resultMap id="${tableNameClass}PoMap" type="${tableNameClass}Po">
+    <resultMap id="${tableNameClass}${layer.classSuffixPo}Map" type="${tableNameClass}${layer.classSuffixPo}">
 #foreach ($column in $columnList)
         <result property="${column.columnNameVariable}" column="${column.columnNameDb}" />
 #end
     </resultMap>
 
-    <insert id="insert" parameterType="${tableNameClass}Po" #if ($primaryKey)useGeneratedKeys="true" keyProperty="${primaryKey.pkNameVariable}"#end>
+    <insert id="insert" parameterType="${tableNameClass}${layer.classSuffixPo}" #if ($primaryKey)useGeneratedKeys="true" keyProperty="${primaryKey.pkNameVariable}"#end>
         INSERT INTO $tableNameDb
             (
 #foreach($index in [$startIndex..$columnLastButOneIndex])
@@ -54,7 +54,7 @@
     </insert>
 #if($primaryKey)
 
-    <update id="updateBy${primaryKey.pkName}" parameterType="${tableNameClass}Po">
+    <update id="updateBy${primaryKey.pkName}" parameterType="${tableNameClass}${layer.classSuffixPo}">
         UPDATE $tableNameDb
         <set>
 #foreach($index in [$startIndex..$columnMaxIndex])
@@ -68,7 +68,7 @@
         DELETE FROM $tableNameDb WHERE ${primaryKey.pkNameDb} = #{${primaryKey.pkNameVariable}}
     </delete>
 
-    <select id="selectBy${primaryKey.pkName}" parameterType="${primaryKey.pkType}" resultType="${tableNameClass}Po">
+    <select id="selectBy${primaryKey.pkName}" parameterType="${primaryKey.pkType}" resultType="${tableNameClass}${layer.classSuffixPo}">
         SELECT
 #foreach($index in [0..$columnLastButOneIndex])
             ${columnList.get($index).columnNameDb},
@@ -78,7 +78,7 @@
     </select>
 #end
 
-    <select id="selectAll" parameterType="map" resultType="${tableNameClass}Po" >
+    <select id="selectAll" parameterType="map" resultType="${tableNameClass}${layer.classSuffixPo}" >
         SELECT
 #foreach($index in [0..$columnLastButOneIndex])
             ${columnList.get($index).columnNameDb},
@@ -106,7 +106,7 @@
         </where>
     </select>
     
-    <select id="selectForPage" parameterType="map" resultType="${tableNameClass}Po">
+    <select id="selectForPage" parameterType="map" resultType="${tableNameClass}${layer.classSuffixPo}">
         SELECT
 #foreach($index in [0..$columnLastButOneIndex])
                 ${columnList.get($index).columnNameDb},

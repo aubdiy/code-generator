@@ -2,7 +2,7 @@ package ${basePackage}.common;
 
 public class BasicConstant {
     public static final char CHAR_TAB = '\t';
-    public static final char CHAR_enter = '\n';
+    public static final char CHAR_ENTER = '\n';
     public static final char CHAR_SOH = '\u0001';
 
     public static final char CHAR_DOT = '.';
