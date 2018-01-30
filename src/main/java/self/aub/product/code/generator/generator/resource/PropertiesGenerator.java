@@ -31,6 +31,7 @@ public class PropertiesGenerator extends Generator {
             context.put("dbUrl", GeneratorConfig.getDbUrl());
             context.put("dbUserName", GeneratorConfig.getDbUserName());
             context.put("dbPassword", GeneratorConfig.getDbPassword());
+            context.put("basePackage", GeneratorConfig.getBasePackage());
             write2FileBySchema("/resource/application-dev.vm", context, outputDir + "application-dev.properties");
         }
     }

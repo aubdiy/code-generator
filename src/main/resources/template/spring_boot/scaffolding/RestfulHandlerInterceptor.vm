@@ -22,8 +22,6 @@ public class RestfulHandlerInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler, ModelAndView modelAndView) {
-        //TODO
-        LOG.debug("RES; URL:{}, PARAM:{},", httpServletRequest.getRequestURI());
     }
 
     @Override
