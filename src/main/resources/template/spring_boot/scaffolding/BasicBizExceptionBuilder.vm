@@ -1,0 +1,11 @@
+package ${basePackage}.common;
+
+/**
+ * 基础的业务异常构造器
+ */
+public class BasicBizExceptionBuilder {
+
+    public static BasicBizException build(String bizCode, String message) {
+        return new BasicBizException(bizCode, message);
+    }
+}

@@ -32,6 +32,6 @@ public class MysqlDaoMapperGenerator extends Generator {
         context.put("layer", layer);
 
         String outputFilePath = outputDir + Constant.SIGN_SLASH + tableNameClass + ".xml";
-        write2FileBySchema("/dao/MysqlMapperXmlTemp.vm", context, outputFilePath);
+        write2FileBySchema("/dao/MysqlMapperXml.vm", context, outputFilePath);
     }
 }

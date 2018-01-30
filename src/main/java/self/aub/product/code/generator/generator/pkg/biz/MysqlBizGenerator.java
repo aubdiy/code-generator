@@ -28,6 +28,6 @@ public class MysqlBizGenerator extends Generator {
         context.put("layer", layer);
 
         String outputFilePath = generateOutputFilePath(tableNameClass, outputDir, layer.getLayerNameBiz(), layer.getFileSuffixBiz());
-        write2FileBySchema("/biz/MysqlBizTemp.vm", context, outputFilePath);
+        write2FileBySchema("/biz/MysqlBiz.vm", context, outputFilePath);
     }
 }

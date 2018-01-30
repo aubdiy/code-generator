@@ -1,0 +1,16 @@
+#####  mysql config ###############################################################################
+spring.datasource.type=com.zaxxer.hikari.HikariDataSource
+spring.datasource.url=${dbUrl}?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false
+spring.datasource.username=${dbUserName}
+spring.datasource.password=${dbPassword}
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+#####  log config #################################################################################
+logging.config=classpath:log4j2-dev.xml
+logging.level.cn.com.hfbank.shj=DEBUG
+
+server.tomcat.basedir=.
+server.tomcat.accesslog.directory=logs
+server.tomcat.accesslog.prefix=tomcat-access
+server.tomcat.accesslog.enabled=true
+server.tomcat.accesslog.pattern= %t [%I] %a %{X-Forwarded-For}i %r %s %D

@@ -26,6 +26,6 @@ public class MysqlPoGenerator extends Generator {
         context.put("layer", layer);
 
         String outputFilePath = generateOutputFilePath(tableNameClass, outputDir, layer.getLayerNamePo(), layer.getFileSuffixPo());
-        write2FileBySchema("/po/MysqlPoTemp.vm", context, outputFilePath);
+        write2FileBySchema("/po/MysqlPo.vm", context, outputFilePath);
     }
 }

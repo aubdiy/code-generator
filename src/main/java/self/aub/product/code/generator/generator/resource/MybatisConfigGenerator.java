@@ -20,6 +20,6 @@ public class MybatisConfigGenerator extends Generator {
 		context.put("mybatisMapperList", mybatisMapperList);
 		Layer layer = GeneratorConfig.getLayer();
 		context.put( "layer", layer );
-		write2FileBySchema("/resource/MysqlMybatisConfigTemp.vm", context, outputDir.concat("mybatis.xml"));
+		write2FileBySchema("/resource/MysqlMybatisConfig.vm", context, outputDir.concat("mybatis.xml"));
 	}
 }

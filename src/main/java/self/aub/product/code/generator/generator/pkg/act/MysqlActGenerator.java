@@ -30,7 +30,7 @@ public class MysqlActGenerator extends Generator {
         context.put("layer", layer);
 
         String outputFilePath = generateOutputFilePath(tableNameClass, outputDir, layer.getLayerNameAct(), layer.getFileSuffixAct());
-        write2FileBySchema("/act/MysqlActTemp.vm", context, outputFilePath);
+        write2FileBySchema("/act/MysqlAct.vm", context, outputFilePath);
 
     }
 }

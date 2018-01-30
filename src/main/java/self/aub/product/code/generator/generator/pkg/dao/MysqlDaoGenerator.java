@@ -28,6 +28,6 @@ public class MysqlDaoGenerator extends Generator {
         context.put("layer", layer);
 
         String outputFilePath = generateOutputFilePath(tableNameClass, outputDir, layer.getLayerNameDao(), layer.getFileSuffixDao());
-        write2FileBySchema("/dao/MysqlDaoTemp.vm", context, outputFilePath);
+        write2FileBySchema("/dao/MysqlDao.vm", context, outputFilePath);
     }
 }

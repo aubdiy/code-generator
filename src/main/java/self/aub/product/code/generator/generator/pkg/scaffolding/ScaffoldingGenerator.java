@@ -30,7 +30,7 @@ public class ScaffoldingGenerator extends Generator {
             File file = new File(scaffoldingPath);
             for (File temp : file.listFiles()) {
                 String tempName = temp.getName();
-                String className = tempName.substring(0, tempName.length() - 7);
+                String className = tempName.substring(0, tempName.length() - 3);
                 LOG.debug("generate scaffolding : {}.java", className);
                 String outputFilePath = generateOutputFilePath(className, outputDir, Constant.LAYER_COMMON, Constant.JAVA_FILE_SUFFIX);
                 write2FileBySchema("/scaffolding/" + tempName, context, outputFilePath);

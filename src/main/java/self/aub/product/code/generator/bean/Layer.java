@@ -35,6 +35,8 @@ public class Layer {
 
         this.classSuffixPo = classSuffixPo;
         this.layerNamePo = classSuffixPo.toLowerCase();
+        //TODO 固定pojo命名
+        //this.layerNamePo = "pojo";
         this.fileSuffixPo = classSuffixPo + JAVA_FILE_SUFFIX;
     }
 

@@ -1,0 +1,38 @@
+package ${systemPackage}.${layer.layerNameDao};
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import ${systemPackage}.${layer.layerNamePo}.${tableNameClass}${layer.classSuffixPo};
+
+import java.util.List;
+import java.util.Map;
+
+@Mapper
+public interface ${tableNameClass}${layer.classSuffixDao} {
+    //TODO 如不使用，开发后请删除此方法
+    int insert(${tableNameClass}${layer.classSuffixPo} ${tableNameVariable}${layer.classSuffixPo});
+
+    //TODO 如不使用，开发后请删除此方法
+    int inserts(List<${tableNameClass}${layer.classSuffixPo}> ${tableNameVariable}${layer.classSuffixPo}s);
+#if($primaryKey)
+
+    //TODO 如不使用，开发后请删除此方法
+    int updateById(${tableNameClass}${layer.classSuffixPo} ${tableNameVariable}${layer.classSuffixPo});
+
+    //TODO 如不使用，开发后请删除此方法
+    int deleteBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable});
+
+    //TODO 如不使用，开发后请删除此方法
+    ${tableNameClass}${layer.classSuffixPo} selectBy${primaryKey.pkName}(${primaryKey.pkType} ${primaryKey.pkNameVariable});
+#end
+
+    //TODO 如不使用，开发后请删除此方法
+    List<${tableNameClass}${layer.classSuffixPo}> selectAll(Map<String, Object> paramMap);
+
+    //TODO 如不使用，开发后请删除此方法
+    long countForPage(Map<String, Object> paramMap);
+
+    //TODO 如不使用，开发后请删除此方法
+    List<${tableNameClass}${layer.classSuffixPo}> selectForPage(@Param("paramMap")Map<String, Object> paramMap, @Param("startIndex") int startIndex, @Param("pageSize")int pageSize);
+
+}
