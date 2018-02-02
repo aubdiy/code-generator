@@ -3,8 +3,6 @@ package self.aub.product.code.generator.generator;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
-import org.apache.velocity.exception.ParseErrorException;
-import org.apache.velocity.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import self.aub.product.code.generator.config.GeneratorConfig;
@@ -14,13 +12,15 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 
 /**
  * @author aub
  */
 public class Generator {
     private static final Logger LOG = LoggerFactory.getLogger(Generator.class);
+
+    protected Generator() {
+    }
 
     protected static String generateOutputFilePath(String className, String outputDir, String layer, String layerClassSuffix) {
         StringBuilder outputFilePath = new StringBuilder(outputDir);
@@ -32,37 +32,13 @@ public class Generator {
         return outputFilePath.toString();
     }
 
-    protected static void write2FileBySchema(String templateFile, VelocityContext context, String outputFilepath) {
-        Template template = getTemplate(GeneratorConfig.getSchema().concat(templateFile));
-        Writer writer = getWriter(outputFilepath);
-        template.merge(context, writer);
-        try {
-            writer.close();
+    protected static void write2FileBySchema(String templateFile, VelocityContext context, String outputFilePath) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputFilePath))) {
+            Template template = Velocity.getTemplate(GeneratorConfig.getSchema().concat(templateFile));
+            template.merge(context, bufferedWriter);
         } catch (IOException e) {
-            LOG.error("write data fail, exception : ", e);
+            LOG.error("write file exception: ", e);
         }
-    }
-
-    private static Writer getWriter(String filePath) {
-        try {
-            return new BufferedWriter(new FileWriter(filePath));
-        } catch (IOException e) {
-            LOG.error("generate file fail : {}", e);
-            throw new RuntimeException();
-        }
-    }
-
-    private static Template getTemplate(String templateFile) {
-        Template template = null;
-        try {
-            template = Velocity.getTemplate(templateFile);
-        } catch (ResourceNotFoundException rnfe) {
-            rnfe.printStackTrace();
-            LOG.error("can not find template " + templateFile);
-        } catch (ParseErrorException pee) {
-            LOG.error("syntax error in template " + templateFile + ":" + pee);
-        }
-        return template;
     }
 
 }

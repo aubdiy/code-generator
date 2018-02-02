@@ -7,6 +7,9 @@ import self.aub.product.code.generator.config.GeneratorConfig;
  */
 public class DbGeneratorFactory {
 
+	private DbGeneratorFactory() {
+	}
+
 	public static DbGenerator createDbGenerator() {
 		DbGenerator dbGenerator;
 		switch (GeneratorConfig.getDbType()) {

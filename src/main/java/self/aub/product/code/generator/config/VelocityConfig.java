@@ -10,6 +10,9 @@ import java.util.Properties;
  */
 public class VelocityConfig {
 
+    private VelocityConfig() {
+    }
+
     public static void init() {
         Velocity.init(generateProperties());
     }

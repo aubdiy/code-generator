@@ -7,6 +7,11 @@ import java.sql.Types;
  */
 public class ConvertUtil {
 
+    private static final String STRING = "String";
+
+    private ConvertUtil() {
+    }
+
     /**
      * <B>将数据库命名转换为骆驼命名</B><br>
      * 例如，“sys_user” 转换为 “SysUser”
@@ -97,10 +102,10 @@ public class ConvertUtil {
                 javaType = "double";
                 break;
             case Types.CHAR:
-                javaType = "String";
+                javaType = STRING;
                 break;
             case Types.VARCHAR:
-                javaType = "String";
+                javaType = STRING;
                 break;
             case Types.TIME:
                 javaType = "Date";
@@ -115,7 +120,7 @@ public class ConvertUtil {
                 javaType = "boolean";
                 break;
             default:
-                javaType = "String";
+                javaType = STRING;
                 break;
         }
         return javaType;

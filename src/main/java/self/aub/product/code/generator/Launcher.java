@@ -14,6 +14,7 @@ import self.aub.product.code.generator.reader.DbReader;
 import self.aub.product.code.generator.reader.DbReaderFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class Launcher {
     private Launcher() {
     }
 
-    private static void launch() throws Exception {
+    private static void launch() throws IOException {
         // 初始化配置
         GeneratorConfig.init();
         VelocityConfig.init();

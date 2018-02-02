@@ -1,7 +1,5 @@
 package ${systemPackage}.${layer.layerNameBiz};
 
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ${basePackage}.common.Page;
 import ${systemPackage}.${layer.layerNameDao}.${tableNameClass}${layer.classSuffixDao};

@@ -5,6 +5,9 @@ package ${basePackage}.common;
  */
 public class BasicBizDtoBuilder {
 
+    private BasicBizDtoBuilder() {
+    }
+
     public static BasicBizDto buildForSuccess() {
         return new BasicBizDto();
     }

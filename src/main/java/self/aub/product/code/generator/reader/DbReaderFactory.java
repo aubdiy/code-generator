@@ -7,6 +7,9 @@ import self.aub.product.code.generator.config.GeneratorConfig;
  */
 public class DbReaderFactory {
 
+    private DbReaderFactory() {
+    }
+
     public static DbReader createDbReader() {
         DbReader dbReader;
         switch (GeneratorConfig.getDbType()) {

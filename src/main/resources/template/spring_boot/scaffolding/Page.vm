@@ -2,7 +2,6 @@ package ${basePackage}.common;
 
 import org.springframework.util.Assert;
 
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
@@ -11,8 +10,7 @@ import java.util.List;
  *
  * @param <T>
  */
-public class Page<T> implements Serializable {
-    private static final long serialVersionUID = 9048673618637656143L;
+public class Page<T> {
     private final long total;
     private final List<T> content;
     private final int pageSize;

@@ -10,6 +10,7 @@ import self.aub.product.code.generator.generator.Generator;
 import self.aub.product.code.generator.util.Constant;
 
 import java.io.File;
+import java.util.Objects;
 
 /**
  * @author aub
@@ -28,7 +29,7 @@ public class ScaffoldingGenerator extends Generator {
             String scaffoldingPath = Velocity.getProperty(VelocityEngine.FILE_RESOURCE_LOADER_PATH) + Constant.SIGN_SLASH + GeneratorConfig.getSchema() + "/scaffolding";
 
             File file = new File(scaffoldingPath);
-            for (File temp : file.listFiles()) {
+            for (File temp : Objects.requireNonNull(file.listFiles())) {
                 String tempName = temp.getName();
                 String className = tempName.substring(0, tempName.length() - 3);
                 LOG.debug("generate scaffolding : {}.java", className);

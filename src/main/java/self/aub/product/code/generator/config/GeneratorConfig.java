@@ -46,6 +46,9 @@ public class GeneratorConfig {
 
     private static Layer layer;
 
+    private GeneratorConfig() {
+    }
+
     public static void init() {
         ResourceBundle resourceBundle = PropertyResourceBundle.getBundle(CONFIG_FILE_PATH);
         for (String key : resourceBundle.keySet()) {

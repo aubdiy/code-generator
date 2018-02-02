@@ -22,7 +22,7 @@ public class MysqlDbReader extends AbstractDbReader {
 
     @Override
     public List<String> getTableNames() {
-        ArrayList<String> tableNames = new ArrayList<String>();
+        ArrayList<String> tableNames = new ArrayList<>();
         String tablePrefix = GeneratorConfig.getTablePrefix();
         Connection conn = getConn();
         ResultSet tableNamesRS = null;
@@ -38,7 +38,7 @@ public class MysqlDbReader extends AbstractDbReader {
                 }
             }
         } catch (SQLException e) {
-            LOG.error("your log info, exception : ", e);
+            LOG.error("get table, exception : ", e);
         } finally {
             closeRS(tableNamesRS);
             closeConn(conn);
@@ -48,7 +48,7 @@ public class MysqlDbReader extends AbstractDbReader {
 
     @Override
     public Map<String, Column> getColumns(String tableName) {
-        Map<String, Column> cloums = new LinkedHashMap<String, Column>();
+        Map<String, Column> cloums = new LinkedHashMap<>();
         Connection conn = getConn();
         ResultSet columnNamesRS = null;
         try {
@@ -63,7 +63,7 @@ public class MysqlDbReader extends AbstractDbReader {
                 LOG.debug("get table column, table : {}, column : {}", tableName, columnName);
             }
         } catch (SQLException e) {
-            LOG.error("your log info, exception : ", e);
+            LOG.error("get table column, exception : ", e);
         } finally {
             closeRS(columnNamesRS);
             closeConn(conn);
@@ -84,7 +84,7 @@ public class MysqlDbReader extends AbstractDbReader {
                 return primaryKeyName;
             }
         } catch (SQLException e) {
-            LOG.error("your log info, exception : ", e);
+            LOG.error("get table primaryKey, exception : ", e);
         } finally {
             closeRS(primaryKeyRS);
             closeConn(conn);

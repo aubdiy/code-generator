@@ -15,6 +15,10 @@ import self.aub.product.code.generator.util.Constant;
 public class MysqlDaoMapperGenerator extends Generator {
     private static final Logger LOG = LoggerFactory.getLogger(MysqlDaoMapperGenerator.class);
 
+    private MysqlDaoMapperGenerator() {
+        super();
+    }
+
     public static void generate(Table table, String systemPackage, String outputDir) {
 
         String tableNameClass = table.getTableNameClass();
