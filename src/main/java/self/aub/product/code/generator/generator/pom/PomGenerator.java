@@ -14,6 +14,7 @@ public class PomGenerator extends Generator {
         VelocityContext context = new VelocityContext();
         context.put("projectName", GeneratorConfig.getProjectName());
         context.put("basePackage", GeneratorConfig.getBasePackage());
+        context.put("layer", GeneratorConfig.getLayer());
         write2FileBySchema("/pom.vm", context, GeneratorConfig.getOutputDir().concat("pom.xml"));
     }
 }

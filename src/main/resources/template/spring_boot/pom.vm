@@ -169,11 +169,11 @@
                     <apiSources>
                         <apiSource>
                             <springmvc>true</springmvc>
-                            <locations>cn.com.hfbank.spider.ctl</locations>
+                            <locations>${basePackage}.${layer.layerNameAct}</locations>
                             <schemes>
                                 <scheme>http</scheme>
                             </schemes>
-                            <outputFormats>yaml</outputFormats>
+                            <outputFormats>json</outputFormats>
                             <swaggerFileName>${project.name}</swaggerFileName>
                             <swaggerDirectory>${basedir}/target/swagger</swaggerDirectory>
                             <info>
