@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ${basePackage}.common.Page;
 import ${systemPackage}.${layer.layerNamePo}.${tableNameClass}${layer.classSuffixPo};
@@ -50,7 +51,7 @@ public class ${tableNameClass}${layer.classSuffixAct} {
 #end
     @RequestMapping(path = "list", method = RequestMethod.GET)
     @ApiOperation(value = "分页查询XXX", response = Page.class)
-    public Page<${tableNameClass}${layer.classSuffixPo}> listForPage(Map<String, Object> paramMap) {
+    public Page<${tableNameClass}${layer.classSuffixPo}> listForPage(@RequestParam Map<String, Object> paramMap) {
         //TODO 请自行整理参数
         return ${tableNameVariable}${layer.classSuffixBiz}.listForPage( paramMap, 1 );
     }
