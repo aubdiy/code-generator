@@ -102,7 +102,7 @@
     </select>
 
     <!-- TODO 如不使用，开发后请删除此 SQL -->
-    <select id="countForPage" parameterType="map" resultType="long">
+    <select id="countForPage" parameterType="map" resultType="java.lang.Long">
         SELECT COUNT(1)
         FROM $tableNameDb
         <where>

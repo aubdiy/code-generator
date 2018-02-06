@@ -22,7 +22,7 @@ public class Column {
     /**
      * 描述
      */
-    private final String columneRemarks;
+    private final String columnRemarks;
 
     /**
      * 数据库字段名，例如“login_name”
@@ -34,11 +34,11 @@ public class Column {
      */
     private final String columnNameVariable;
 
-    public Column(String columnNameDb, int dbDateType, String columneRemarks) {
+    public Column(String columnNameDb, int dbDateType, String columnRemarks) {
         this.columnName = ConvertUtil.convert2CamelCase(columnNameDb);
         this.columnType = ConvertUtil.conver2JavaType(dbDateType);
         this.columnNameDb = columnNameDb;
-        this.columneRemarks = columneRemarks;
+        this.columnRemarks = columnRemarks;
         this.columnNameVariable = ConvertUtil.conver2VariableName(columnName);
     }
 
@@ -50,8 +50,8 @@ public class Column {
         return columnType;
     }
 
-    public String getColumneRemarks() {
-        return columneRemarks;
+    public String getColumnRemarks() {
+        return columnRemarks;
     }
 
     public String getColumnNameDb() {

@@ -1,5 +1,6 @@
 package ${systemPackage}.${layer.layerNameAct};
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/${tableNameVariable}")
+@Api(value = "/${tableNameVariable}", description = "${tableRemarks}")
 public class ${tableNameClass}${layer.classSuffixAct} {
     @Resource
     private ${tableNameClass}${layer.classSuffixBiz} ${tableNameVariable}${layer.classSuffixBiz};
@@ -24,7 +26,7 @@ public class ${tableNameClass}${layer.classSuffixAct} {
     @ApiOperation(value = "创建XXX", response = Boolean.class)
     public boolean create(@ApiParam(name = "${tableNameVariable}${layer.classSuffixPo}") ${tableNameClass}${layer.classSuffixPo} ${tableNameVariable}${layer.classSuffixPo}) {
         //TODO 如不使用，开发后请删除此方法
-        return ${tableNameVariable}${layer.classSuffixBiz}.create( ${tableNameVariable}${layer.classSuffixPo} );
+        return ${tableNameVariable}${layer.classSuffixBiz}.create(${tableNameVariable}${layer.classSuffixPo});
     }
 #if($primaryKey)
 
@@ -32,27 +34,27 @@ public class ${tableNameClass}${layer.classSuffixAct} {
     @ApiOperation(value = "更新XXX", response = Boolean.class)
     public boolean updateBy${primaryKey.pkName}(@ApiParam(name = "${tableNameVariable}${layer.classSuffixPo}") ${tableNameClass}${layer.classSuffixPo} ${tableNameVariable}${layer.classSuffixPo}) {
         //TODO 如不使用，开发后请删除此方法
-        return ${tableNameVariable}${layer.classSuffixBiz}.updateBy${primaryKey.pkName}( ${tableNameVariable}${layer.classSuffixPo} );
+        return ${tableNameVariable}${layer.classSuffixBiz}.updateBy${primaryKey.pkName}(${tableNameVariable}${layer.classSuffixPo});
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     @ApiOperation(value = "删除XXX", response = Boolean.class)
     public boolean removeBy${primaryKey.pkName}(@ApiParam(name = "${primaryKey.pkNameVariable}", value = "请补充参数说明", example = "请补充参数例子") ${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
         //TODO 如不使用，开发后请删除此方法
-        return ${tableNameVariable}${layer.classSuffixBiz}.removeBy${primaryKey.pkName}( ${primaryKey.pkNameVariable} );
+        return ${tableNameVariable}${layer.classSuffixBiz}.removeBy${primaryKey.pkName}(${primaryKey.pkNameVariable});
     }
 
     @RequestMapping(method = RequestMethod.GET)
     @ApiOperation(value = "查询XXX", response = Boolean.class)
     public ${tableNameClass}${layer.classSuffixPo} getBy${primaryKey.pkName}(@ApiParam(name = "${primaryKey.pkNameVariable}", value = "请补充参数说明", example = "请补充参数例子") ${primaryKey.pkType} ${primaryKey.pkNameVariable}) {
         //TODO 如不使用，开发后请删除此方法
-        return ${tableNameVariable}${layer.classSuffixBiz}.getBy${primaryKey.pkName}( ${primaryKey.pkNameVariable} );
+        return ${tableNameVariable}${layer.classSuffixBiz}.getBy${primaryKey.pkName}(${primaryKey.pkNameVariable});
     }
 #end
     @RequestMapping(path = "list", method = RequestMethod.GET)
     @ApiOperation(value = "分页查询XXX", response = Page.class)
     public Page<${tableNameClass}${layer.classSuffixPo}> listForPage(@RequestParam Map<String, Object> paramMap) {
         //TODO 请自行整理参数
-        return ${tableNameVariable}${layer.classSuffixBiz}.listForPage( paramMap, 1 );
+        return ${tableNameVariable}${layer.classSuffixBiz}.listForPage(paramMap, 1);
     }
 }

@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author aub
@@ -27,9 +29,11 @@ public abstract class AbstractDbReader implements DbReader {
     @Override
     public List<Table> getTableBeans() {
         List<Table> tables = new ArrayList<>();
-        List<String> tableNames = getTableNames();
-        for (String tableName : tableNames) {
-            Table table = new Table(tableName, getPrimaryKeyName(tableName), getColumns(tableName));
+        Map<String, String> tableInfos = getTableInfo();
+        for (Map.Entry<String, String> entry : tableInfos.entrySet()) {
+            String tableName = entry.getKey();
+            String tableRemarks = entry.getValue();
+            Table table = new Table(tableName, tableRemarks, getPrimaryKeyName(tableName), getColumns(tableName));
             tables.add(table);
         }
         return tables;
@@ -42,10 +46,16 @@ public abstract class AbstractDbReader implements DbReader {
             LOG.error("find driver fail :　", e);
         }
         String url = GeneratorConfig.getDbUrl();
-        String username = GeneratorConfig.getDbUserName();
-        String password = GeneratorConfig.getDbPassword();
+        Properties props = new Properties();
+        props.put("user", GeneratorConfig.getDbUserName());
+        props.put("password", GeneratorConfig.getDbPassword());
+        //可以读取表描述
+        props.put("useInformationSchema", "true");
+//        props.put("nullNamePatternMatchesAll", "true");
+
+
         try {
-            return DriverManager.getConnection(url, username, password);
+            return DriverManager.getConnection(url, props);
         } catch (SQLException e) {
             LOG.error("get connection fail : ", e);
         }

@@ -20,6 +20,11 @@ public class Table {
      */
     private final String tableNameDb;
     /**
+     * 描述
+     */
+    private final String tableRemarks;
+
+    /**
      * 实体类名，例如“SysUser”
      */
     private final String tableNameClass;
@@ -40,8 +45,9 @@ public class Table {
      */
     private final List<Column> columnList;
 
-    public Table(String tableName, String primaryKeyName, Map<String, Column> columnMap) {
+    public Table(String tableName, String tableRemarks, String primaryKeyName, Map<String, Column> columnMap) {
         this.tableNameDb = tableName;
+        this.tableRemarks = tableRemarks;
         if (primaryKeyName != null) {
             Column pkColumn = columnMap.get(primaryKeyName);
             if (pkColumn != null) {
@@ -76,16 +82,12 @@ public class Table {
         return "";
     }
 
-    public PrimaryKey getPrimaryKey() {
-        return primaryKey;
-    }
-
-    public void setPrimaryKey(PrimaryKey primaryKey) {
-        this.primaryKey = primaryKey;
-    }
-
     public String getTableNameDb() {
         return tableNameDb;
+    }
+
+    public String getTableRemarks() {
+        return tableRemarks;
     }
 
     public String getTableNameClass() {
@@ -98,6 +100,10 @@ public class Table {
 
     public String getModleName() {
         return modleName;
+    }
+
+    public PrimaryKey getPrimaryKey() {
+        return primaryKey;
     }
 
     public List<Column> getColumnList() {

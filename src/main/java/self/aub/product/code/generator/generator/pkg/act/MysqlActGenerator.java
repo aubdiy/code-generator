@@ -24,6 +24,7 @@ public class MysqlActGenerator extends Generator {
         context.put("basePackage", basePackage);
         context.put("systemPackage", systemPackage);
         context.put("tableNameClass", tableNameClass);
+        context.put("tableRemarks", table.getTableRemarks());
         context.put("tableNameVariable", table.getTableNameVariable());
         context.put("requestMapping", ConvertUtil.conver2RequestMapping(table.getTableNameDb()));
         context.put("primaryKey", table.getPrimaryKey());

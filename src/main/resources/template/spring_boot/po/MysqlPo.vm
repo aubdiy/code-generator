@@ -1,14 +1,20 @@
 package ${systemPackage}.${layer.layerNamePo};
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
+@ApiModel(description = "${tableRemarks}")
 public class ${tableNameClass}${layer.classSuffixPo} {
 #foreach ($column in $columnList)
-    @ApiModelProperty(value = "${column.columneRemarks}")
+
+    @ApiModelProperty(value = "${column.columnRemarks}")
     private ${column.columnType} ${column.columnNameVariable};
 #end
+
+    private ${tableNameClass}${layer.classSuffixPo}() {
+    }
 }

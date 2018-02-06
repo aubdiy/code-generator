@@ -22,6 +22,7 @@ public class MysqlPoGenerator extends Generator {
         VelocityContext context = new VelocityContext();
         context.put("systemPackage", systemPackage);
         context.put("tableNameClass", tableNameClass);
+        context.put("tableRemarks", table.getTableRemarks());
         context.put("columnList", table.getColumnList());
         context.put("layer", layer);
 

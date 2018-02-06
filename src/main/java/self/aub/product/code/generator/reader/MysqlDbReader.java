@@ -9,9 +9,8 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,8 +20,9 @@ public class MysqlDbReader extends AbstractDbReader {
     private static final Logger LOG = LoggerFactory.getLogger(MysqlDbReader.class);
 
     @Override
-    public List<String> getTableNames() {
-        ArrayList<String> tableNames = new ArrayList<>();
+    public Map<String, String> getTableInfo() {
+
+        HashMap<String, String> tableInfo = new HashMap<>();
         String tablePrefix = GeneratorConfig.getTablePrefix();
         Connection conn = getConn();
         ResultSet tableNamesRS = null;
@@ -32,9 +32,10 @@ public class MysqlDbReader extends AbstractDbReader {
             tableNamesRS = dbmd.getTables(null, null, null, types);
             while (tableNamesRS.next()) {
                 String tableName = tableNamesRS.getString("TABLE_NAME");
+                String tableRemarks = tableNamesRS.getString("REMARKS");
                 if (tableName.startsWith(tablePrefix)) {
-                    tableNames.add(tableName);
-                    LOG.debug("get table : {}", tableName);
+                    tableInfo.put(tableName, tableRemarks);
+                    LOG.debug("get table : {}, {}", tableName, tableRemarks);
                 }
             }
         } catch (SQLException e) {
@@ -43,7 +44,7 @@ public class MysqlDbReader extends AbstractDbReader {
             closeRS(tableNamesRS);
             closeConn(conn);
         }
-        return tableNames;
+        return tableInfo;
     }
 
     @Override

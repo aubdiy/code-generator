@@ -19,11 +19,11 @@ public interface DbReader {
     List<Table> getTableBeans();
 
     /**
-     * <B>获取当前库所有表名</B><br>
+     * <B>获取当前库所有表信息（表名，表描述）</B><br>
      *
      * @return table name 列表
      */
-    List<String> getTableNames();
+    Map<String, String> getTableInfo();
 
     /**
      * <B>获取表的所有列</B><br>
