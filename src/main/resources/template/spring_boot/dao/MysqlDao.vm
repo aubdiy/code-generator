@@ -33,6 +33,6 @@ public interface ${tableNameClass}${layer.classSuffixDao} {
     long countForPage(Map<String, Object> paramMap);
 
     //TODO 如不使用，开发后请删除此方法
-    List<${tableNameClass}${layer.classSuffixPo}> selectForPage(@Param("paramMap")Map<String, Object> paramMap, @Param("startIndex") int startIndex, @Param("pageSize")int pageSize);
+    List<${tableNameClass}${layer.classSuffixPo}> selectForPage(@Param("paramMap") Map<String, Object> paramMap, @Param("startIndex") int startIndex, @Param("pageSize") int pageSize);
 
 }
