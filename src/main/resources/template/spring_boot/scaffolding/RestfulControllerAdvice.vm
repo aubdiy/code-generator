@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
 
 
 /**
@@ -31,11 +32,11 @@ public class RestfulControllerAdvice {
         return new RestfulResult(basicBizDto);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
+    @ExceptionHandler({IllegalArgumentException.class, ConstraintViolationException.class})
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public RestfulResult handleIllegalArgumentException(HttpServletRequest request, Exception exception) {
-        LOG.error("REQ; URL:{}, PARAM:{}, EXC:", request.getRequestURI(), request.getParameterMap(), exception);
+        LOG.error("REQ; URL:{}, PARAM:{}, EXC:{}", request.getRequestURI(), request.getParameterMap(), exception.getMessage());
         return new RestfulResult(RestfulStatusEnum.ILLEGAL_ARGUMENT, exception.getMessage());
     }
 
@@ -46,7 +47,5 @@ public class RestfulControllerAdvice {
         LOG.error("REQ; URL:{}, PARAM:{}, EXC:", request.getRequestURI(), request.getParameterMap(), exception);
         return new RestfulResult(RestfulStatusEnum.SREVER_SIDE_FAIL, exception.getMessage());
     }
-
 }
-
 
